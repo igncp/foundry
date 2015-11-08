@@ -5,7 +5,7 @@ var renderProjects = require('./app/projects').renderProjects;
 
 (function () {
   var fetchAndRender = function fetchAndRender() {
-    return $.ajax('/projects.json').then(renderProjects);
+    return $.ajax('projects.json').then(renderProjects);
   };
 
   $(document).ready(fetchAndRender);

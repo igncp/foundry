@@ -1,0 +1,4 @@
+url: ''
+only:
+  - 'index.html'
+  - 'index'

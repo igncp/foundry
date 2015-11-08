@@ -1,0 +1,2 @@
+watch:
+	webpack -w

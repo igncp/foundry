@@ -1,0 +1,30 @@
+@import 'common/sass/devices';
+#menu-bar {
+  background-color: #fff;
+  border: solid 1px #777;
+  left: -150%;
+  min-height: 99%;
+  position: absolute;
+  top: 0;
+  transition: .5s linear all;
+  width: 99%;
+  &.visible {
+    left: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  ul {
+    list-style: none;
+    padding: 10px;
+  }
+  @media #{$tablet} {
+    width: 400px;
+  }
+}
+
+#menu-bar-cross {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+}

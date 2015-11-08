@@ -43,5 +43,3 @@ for project in projects:
 
 with open('projects.json', 'w') as file:
   json.dump(projects, file)
-
-# remove projects and common directory

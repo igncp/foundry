@@ -28,7 +28,9 @@ gulp.task('js', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['js', 'sass'], function() {
+gulp.task('build', ['js', 'sass']);
+
+gulp.task('watch', ['build'], function() {
   gulp.watch('./src/**/*.js', ['js']);
   gulp.watch('./src/**/*.scss', ['sass']);
 });

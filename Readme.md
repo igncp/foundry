@@ -1,3 +1,3 @@
 # foundry
 
-frontend examples
+GitHub pages for foundry

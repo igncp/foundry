@@ -3,3 +3,7 @@ server:
 
 gulp:
 	./node_modules/.bin/gulp
+
+build:
+	./node_modules/.bin/gulp js
+	./node_modules/.bin/gulp sass

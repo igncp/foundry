@@ -14,27 +14,25 @@ var renderProjects = require('./app/projects').renderProjects;
 },{"./app/projects":2}],2:[function(require,module,exports){
 'use strict';
 
-var filterProjects = function filterProjects(projects) {
+exports.filterProjects = function (projects) {
   return _.chain(projects).filter(function (project) {
     return project.url;
   }).value();
 };
 
-var generateLinksRows = function generateLinksRows(project) {
-  return $('<li>').append($('<a>').text(project.name).attr('href', project.url));
+exports.getRowHtml = function (project) {
+  return '<span class="col-lg-4">\n  <a href="' + project.url + '">' + project.name + '</a></span><span>' + (project.technologies ? project.technologies.join(' - ') : '') + '\n</span>';
 };
 
-var renderProjects = function renderProjects(projects) {
-  var filteredProjects = filterProjects(projects);
-  var projectsDomList = $.map(filteredProjects, generateLinksRows);
+exports.createRowEls = function (project) {
+  return $('<li class="row">').append(exports.getRowHtml(project));
+};
+
+exports.renderProjects = function (projects) {
+  var filteredProjects = exports.filterProjects(projects);
+  var projectsDomList = _.map(filteredProjects, exports.createRowEls);
 
   $('#projects').append(projectsDomList);
-};
-
-module.exports = {
-  filterProjects: filterProjects,
-  generateLinksRows: generateLinksRows,
-  renderProjects: renderProjects
 };
 
 },{}]},{},[1])

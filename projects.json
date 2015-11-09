@@ -1,1 +1,1 @@
-[{"url": "menu", "only": ["index.html", "dist"], "name": "React Menu", "location": "projects/react-menu"}, {"url": "", "only": ["index.html", "dist"], "location": "projects/index"}]
+[{"name": "Reactive Dashboard", "url": "reactive-dashboard", "sources": ["http://codepen.io/fbrz/pen/yEHok"], "only": ["index.html", "dist"], "location": "projects/react-dashboard", "technologies": ["react", "es6", "webpack", "sass"]}, {"url": "", "only": ["index.html", "dist"], "location": "projects/index"}]

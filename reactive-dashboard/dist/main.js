@@ -53,21 +53,25 @@
 
 	'use strict';
 
-	var _menuBar = __webpack_require__(2);
+	var _common = __webpack_require__(2);
+
+	var _common2 = _interopRequireDefault(_common);
+
+	var _menuBar = __webpack_require__(3);
 
 	var _menuBar2 = _interopRequireDefault(_menuBar);
 
-	var _menuTrigger = __webpack_require__(8);
+	var _menuTrigger = __webpack_require__(9);
 
 	var _menuTrigger2 = _interopRequireDefault(_menuTrigger);
 
-	var _menuData = __webpack_require__(11);
+	var _loader = __webpack_require__(12);
 
-	var _menuData2 = _interopRequireDefault(_menuData);
+	var _loader2 = _interopRequireDefault(_loader);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(12);
+	__webpack_require__(15);
 
 	var Main = React.createClass({
 	  getInitialState: function getInitialState() {
@@ -75,21 +79,41 @@
 	      showMenu: false
 	    };
 	  },
-	  render: function render() {
+	  getMenuList: function getMenuList() {
 	    var _this = this;
+
+	    return [{
+	      name: 'index',
+	      action: function action() {
+	        return _common2.default.goToIndex();
+	      }
+	    }, {
+	      name: 'load',
+	      action: function action() {
+	        _this.setState({ isLoading: true });
+
+	        setTimeout(function () {
+	          return _this.setState({ isLoading: false });
+	        }, 1000);
+	      }
+	    }];
+	  },
+	  render: function render() {
+	    var _this2 = this;
 
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(_menuBar2.default, {
-	        items: _menuData2.default,
+	        items: this.getMenuList(),
 	        visible: this.state.showMenu,
 	        onClose: function onClose() {
-	          return _this.setState({ showMenu: false });
+	          return _this2.setState({ showMenu: false });
 	        } }),
 	      React.createElement(_menuTrigger2.default, { onTrigger: function onTrigger() {
-	          return _this.setState({ showMenu: true });
-	        } })
+	          return _this2.setState({ showMenu: true });
+	        } }),
+	      React.createElement(_loader2.default, { isActive: this.state.isLoading })
 	    );
 	  }
 	});
@@ -101,13 +125,35 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+
+	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+
+	(function (scope) {
+	  var common = {};
+
+	  common.goToIndex = function () {
+	    location.replace('/foundry');
+	  };
+
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (common), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object') {
+	    module.exports = common;
+	  } else scope.foundryCommon = common;
+	})(window);
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _classnames = __webpack_require__(3);
+	var _classnames = __webpack_require__(4);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -126,16 +172,16 @@
 	      React.createElement(
 	        "div",
 	        { id: "menu-bar-cross", onClick: this.props.onClose },
-	        "x"
+	        "✕"
 	      ),
 	      React.createElement(
 	        "ul",
 	        null,
 	        _.map(this.props.items, function (item, index) {
 	          return React.createElement(
-	            "a",
-	            { key: index, href: item[1] },
-	            item[0]
+	            "li",
+	            { key: index, onClick: item.action },
+	            item.name
 	          );
 	        })
 	      )
@@ -143,10 +189,10 @@
 	  }
 	});
 
-	__webpack_require__(4);
+	__webpack_require__(5);
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -200,23 +246,23 @@
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(5);
+	var content = __webpack_require__(6);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
+	var update = __webpack_require__(8)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./menu-bar.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./menu-bar.scss");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./menu-bar.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./menu-bar.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -226,21 +272,21 @@
 	}
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(6)();
+	exports = module.exports = __webpack_require__(7)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "#menu-bar {\n  background-color: #fff;\n  border: solid 1px #777;\n  left: -150%;\n  min-height: 99%;\n  position: absolute;\n  top: 0;\n  transition: .5s linear all;\n  width: 99%; }\n  #menu-bar.visible {\n    left: 0; }\n  #menu-bar a {\n    text-decoration: none; }\n  #menu-bar ul {\n    list-style: none;\n    padding: 10px; }\n  @media (min-width: 768px) {\n    #menu-bar {\n      width: 400px; } }\n\n#menu-bar-cross {\n  cursor: pointer;\n  position: absolute;\n  right: 20px; }\n", ""]);
+	exports.push([module.id, "#menu-bar {\n  background-color: #fff;\n  border: 0;\n  box-shadow: 0 0 20px 3px #bbb;\n  left: -105%;\n  min-height: 100%;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  transition: 1s ease all;\n  width: 99%;\n  z-index: 10; }\n  #menu-bar.visible {\n    left: 0; }\n  #menu-bar ul {\n    list-style: none;\n    margin-top: 40px;\n    padding: 0; }\n    #menu-bar ul li {\n      border-bottom: 1px solid #fff;\n      color: #888;\n      cursor: pointer;\n      margin: 10px 0;\n      padding: 10px 20px;\n      text-decoration: none;\n      width: 100%; }\n      #menu-bar ul li:hover {\n        background-color: #1abc9c;\n        color: #fff; }\n  @media (min-width: 768px) {\n    #menu-bar {\n      width: 400px; } }\n\n#menu-bar-cross {\n  color: #888;\n  cursor: pointer;\n  position: absolute;\n  right: 10px;\n  top: 10px; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	/*
@@ -296,7 +342,7 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -550,7 +596,7 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -558,7 +604,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	__webpack_require__(9);
+	__webpack_require__(10);
 
 	exports.default = React.createClass({
 	  propTypes: {
@@ -567,30 +613,30 @@
 	  render: function render() {
 	    return React.createElement(
 	      "div",
-	      { id: "menu-trigger", onClick: this.props.onTrigger },
-	      "Trigger"
+	      { className: "menu-trigger", onClick: this.props.onTrigger },
+	      React.createElement("span", null)
 	    );
 	  }
 	});
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(10);
+	var content = __webpack_require__(11);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
+	var update = __webpack_require__(8)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./menu-trigger.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./menu-trigger.scss");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./menu-trigger.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./menu-trigger.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -600,38 +646,102 @@
 	}
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(6)();
+	exports = module.exports = __webpack_require__(7)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "#menu-trigger {\n  cursor: pointer; }\n", ""]);
+	exports.push([module.id, ".menu-trigger {\n  cursor: pointer;\n  display: inline-block;\n  height: 30px;\n  margin-left: 20px;\n  margin-top: 30px;\n  width: 28px; }\n  .menu-trigger:hover span, .menu-trigger:hover span:after, .menu-trigger:hover span:before {\n    background-color: #1abc9c; }\n  .menu-trigger span {\n    cursor: pointer;\n    display: block;\n    position: relative; }\n    .menu-trigger span:after, .menu-trigger span:before {\n      content: '';\n      left: 0;\n      position: absolute; }\n    .menu-trigger span:after {\n      top: 20px; }\n    .menu-trigger span {\n      top: 0; }\n    .menu-trigger span:before {\n      top: 10px; }\n    .menu-trigger span, .menu-trigger span:after, .menu-trigger span:before {\n      background-color: #888;\n      border-radius: 2px;\n      height: 5px;\n      transition: all .3s;\n      width: 100%;\n      backface-visibility: hidden; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 11 */
-/***/ function(module, exports) {
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	module.exports = [["index", "#"]];
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function (props) {
+	  return React.createElement(
+	    "div",
+	    null,
+	    props.isActive && React.createElement(
+	      "div",
+	      { className: "loader" },
+	      React.createElement(
+	        "div",
+	        { className: "loader-animation" },
+	        React.createElement("div", { className: "loader-d1" }),
+	        React.createElement("div", { className: "loader-d2" }),
+	        React.createElement("div", { className: "loader-d3" }),
+	        React.createElement("div", { className: "loader-d4" }),
+	        React.createElement("div", { className: "loader-d5" })
+	      )
+	    )
+	  );
+	};
+
+	__webpack_require__(13);
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(13);
+	var content = __webpack_require__(14);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./loader.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./loader.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".loader {\n  background-color: rgba(0, 0, 0, 0.2);\n  display: block;\n  height: 100%;\n  left: 0;\n  position: absolute;\n  top: 0;\n  width: 100%;\n  z-index: 100; }\n  .loader .loader-animation {\n    height: 40px;\n    left: 50%;\n    margin: -20px -50px;\n    position: absolute;\n    top: 50%;\n    width: 100px; }\n    .loader .loader-animation div {\n      background: #fff;\n      border-radius: 50%;\n      height: 20px;\n      position: absolute;\n      width: 20px; }\n      .loader .loader-animation div.loader-d1 {\n        animation: animate-loader 2s linear infinite; }\n      .loader .loader-animation div.loader-d2 {\n        animation: animate-loader 2s linear infinite -.4s; }\n      .loader .loader-animation div.loader-d3 {\n        animation: animate-loader 2s linear infinite -.8s; }\n      .loader .loader-animation div.loader-d4 {\n        animation: animate-loader 2s linear infinite -1.2s; }\n      .loader .loader-animation div.loader-d5 {\n        animation: animate-loader 2s linear infinite -1.6s; }\n\n@-webkit-keyframes animate-loader {\n  0% {\n    left: 100px;\n    top: 0; }\n  80% {\n    left: 0;\n    top: 0; }\n  85% {\n    height: 20px;\n    left: 0;\n    top: -20px;\n    width: 20px; }\n  90% {\n    height: 15px;\n    width: 40px; }\n  95% {\n    height: 20px;\n    left: 100px;\n    top: -20px;\n    width: 20px; }\n  100% {\n    left: 100px;\n    top: 0; } }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(16);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -648,15 +758,15 @@
 	}
 
 /***/ },
-/* 13 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(6)();
+	exports = module.exports = __webpack_require__(7)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "#main {\n  margin: 0; }\n", ""]);
+	exports.push([module.id, "#main {\n  margin: 0;\n  font-family: \"Segoe UI\", Candara, \"Bitstream Vera Sans\", \"DejaVu Sans\", \"Bitstream Vera Sans\", \"Trebuchet MS\", Verdana, \"Verdana Ref\", sans-serif; }\n", ""]);
 
 	// exports
 

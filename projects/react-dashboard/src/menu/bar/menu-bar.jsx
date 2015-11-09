@@ -9,10 +9,12 @@ export default React.createClass({
   render() {
     return (
       <div id="menu-bar" className={classnames({visible: this.props.visible})}>
-        <div id="menu-bar-cross" onClick={this.props.onClose}>x</div>
+        <div id="menu-bar-cross" onClick={this.props.onClose}>&#x2715;</div>
         <ul>
           {_.map(this.props.items, (item, index)=> {
-            return (<a key={index} href={item[1]}>{item[0]}</a>)
+            return (
+              <li key={index} onClick={item.action}>{item.name}</li>
+            );
           })}
         </ul>
     </div>);

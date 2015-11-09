@@ -1,16 +1,14 @@
-const filterProjects = projects => _.chain(projects).filter(project => project.url).value();
+exports.filterProjects = projects => _.chain(projects).filter(project => project.url).value();
 
-const generateLinksRows = project => $('<li>').append($('<a>').text(project.name).attr('href', project.url));
+exports.getRowHtml = project => `<span class="col-lg-4">
+  <a href="${project.url}">${project.name}</a></span><span>${project.technologies ? project.technologies.join(' - ') : ''}
+</span>`;
 
-const renderProjects = (projects)=> {
-  const filteredProjects = filterProjects(projects);
-  const projectsDomList = $.map(filteredProjects, generateLinksRows);
+exports.createRowEls = project => $('<li class="row">').append(exports.getRowHtml(project));
+
+exports.renderProjects = (projects)=> {
+  const filteredProjects = exports.filterProjects(projects);
+  const projectsDomList =_.map(filteredProjects, exports.createRowEls);
 
   $('#projects').append(projectsDomList);
-}
-
-module.exports = {
-  filterProjects: filterProjects,
-  generateLinksRows: generateLinksRows,
-  renderProjects: renderProjects
 };

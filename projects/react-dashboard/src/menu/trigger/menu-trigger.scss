@@ -1,0 +1,48 @@
+@import '../colors';
+
+.menu-trigger {
+  cursor: pointer;
+  display: inline-block;
+  height: 30px;
+  margin-left: 20px;
+  margin-top: 30px;
+  width: 28px;
+  &:hover span {
+    &,
+    &:after,
+    &:before {
+      background-color: $secondary-color;
+    }
+  }
+  span {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    &:after,
+    &:before {
+      content: '';
+      left: 0;
+      position: absolute;
+    }
+    &:after {
+      top: 20px;
+    }
+    & {
+      top: 0;
+    }
+    &:before {
+      top: 10px;
+    }
+    &,
+    &:after,
+    &:before {
+      background-color: $primary-color;
+      border-radius: 2px;
+      height: 5px;
+      transition: all .3s;
+      width: 100%;
+
+      backface-visibility: hidden;
+    }
+  }
+}

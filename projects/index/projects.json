@@ -1,0 +1,11 @@
+[{
+  "url": "menu",
+  "only": ["index.html", "dist"],
+  "location": "projects/react-menu",
+  "technologies": ["react", "es6", "webpack", "sass"],
+  "name": "React Menu"
+}, {
+  "url": "",
+  "only": ["index.html", "dist"],
+  "location": "projects/index"
+}]

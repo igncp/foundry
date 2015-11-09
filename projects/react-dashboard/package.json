@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.0",
+    "http-server": "^0.8.5",
     "webpack": "^1.12.3",
     "webpack-dev-server": "^1.12.1"
   },

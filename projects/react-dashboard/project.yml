@@ -1,0 +1,12 @@
+name: 'Reactive Dashboard'
+url: 'reactive-dashboard'
+only:
+  - index.html
+  - dist
+technologies:
+  - react
+  - es6
+  - webpack
+  - sass
+sources:
+  - 'http://codepen.io/fbrz/pen/yEHok'

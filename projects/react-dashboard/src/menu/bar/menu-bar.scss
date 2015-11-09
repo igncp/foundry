@@ -1,0 +1,48 @@
+@import 'common/sass/devices';
+@import '../colors';
+
+#menu-bar {
+  background-color: #fff;
+  border: 0;
+  box-shadow: 0 0 20px 3px #bbb;
+  left: -105%;
+  min-height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transition: 1s ease all;
+  width: 99%;
+  z-index: 10;
+  &.visible {
+    left: 0;
+  }
+  ul {
+    list-style: none;
+    margin-top: 40px;
+    padding: 0;
+    li {
+      border-bottom: 1px solid #fff;
+      color: #888;
+      cursor: pointer;
+      margin: 10px 0;
+      padding: 10px 20px;
+      text-decoration: none;
+      width: 100%;
+      &:hover {
+        background-color: $secondary-color;
+        color: #fff;
+      }
+    }
+  }
+  @media #{$tablet} {
+    width: 400px;
+  }
+}
+
+#menu-bar-cross {
+  color: #888;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}

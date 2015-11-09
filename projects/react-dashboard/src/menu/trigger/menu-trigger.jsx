@@ -6,6 +6,6 @@ export default React.createClass({
   },
   render() {
     return (
-      <div id="menu-trigger" onClick={this.props.onTrigger}>Trigger</div>);
+      <div className="menu-trigger" onClick={this.props.onTrigger}><span></span></div>);
   }
 });

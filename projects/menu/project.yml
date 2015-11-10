@@ -1,0 +1,10 @@
+name: 'Menu'
+url: 'menu'
+only:
+  - index.html
+  - dist
+technologies:
+  - react
+  - es6
+  - webpack
+  - sass

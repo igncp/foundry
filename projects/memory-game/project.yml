@@ -1,0 +1,11 @@
+name: 'Memory game'
+url: 'memory-game'
+only:
+  - index.html
+  - dist
+technologies:
+  - react
+  - es6
+  - webpack
+  - ramda
+  - reflux

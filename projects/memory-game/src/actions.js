@@ -1,6 +1,5 @@
 export default Reflux.createActions([
-  'updateScore',
-  'generateCards',
-  'getGameSettings',
+  'generateDeck',
   'setGameSettings',
+  'handleCardClick'
 ]);

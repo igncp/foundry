@@ -1,24 +1,23 @@
 import actions from 'actions.js';
 
-let size;
+let size = 4;
 
 export default Reflux.createStore({
   init() {
-    this.onSetGameSettings();
-
     this.listenTo(actions.setGameSettings, this.onSetGameSettings);
-    this.listenTo(actions.getGameSettings, this.onGetGameSettings);
   },
-  onSetGameSettings() {
-    size = 3;
+  onSetGameSettings(settings) {
+    size = settings.size;
     this.triggerGameSettings();
   },
-  onGetGameSettings() {
-    this.triggerGameSettings();
+  getGameSettings() {
+    return {
+      size: size,
+    };
   },
   triggerGameSettings() {
-    this.trigger({
-      size: size,
-    });
+    const settings = this.getGameSettings();
+
+    this.trigger(settings);
   },
 });

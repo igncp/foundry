@@ -1,5 +1,7 @@
 import scoreStore from 'stores/scoreStore.js';
 
+const styles = getStyles();
+
 export default React.createClass({
   componentDidMount: function() {
     this.unsubscribe = scoreStore.listen(this.onScoreChange);
@@ -13,6 +15,16 @@ export default React.createClass({
    })
   },
   render() {
-    return (<div>Score: {this.state ? this.state.score : 0}</div>);
+    return (<div style={styles.panel}>Score: {this.state ? this.state.score : 0}</div>);
   }
 });
+
+function getStyles() {
+  return {
+    panel: {
+      float: 'right',
+      width: '50%',
+      paddingTop: 20,
+    },
+  };
+}

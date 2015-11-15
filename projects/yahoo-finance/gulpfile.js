@@ -4,6 +4,7 @@ const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const browserify = require('browserify');
 const babelify = require('babelify');
+const stringify = require('stringify');
 
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
@@ -22,6 +23,7 @@ gulp.task('js', function() {
       paths: ['./node_modules', './src/'],
       debug: true
     })
+    .transform(stringify(['.html']))
     .transform(babelify, {
       presets: ['es2015']
     })
@@ -37,21 +39,12 @@ gulp.task('js', function() {
     .pipe(livereload());
 });
 
-gulp.task('html', function() {
-  gulp.src('src/**/*.html', {
-      base: './src'
-    })
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('build', ['js', 'sass', 'html']);
+gulp.task('build', ['js', 'sass']);
 
 gulp.task('watch', ['build'], function() {
   livereload.listen();
   gulp.watch('./src/**/*.js', ['js']);
-  gulp.watch('./src/**/*.html', ['html']);
   gulp.watch('./src/sass/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['watch']);
-

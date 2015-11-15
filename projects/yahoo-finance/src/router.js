@@ -10,7 +10,7 @@ module.exports.configure = function(app) {
     $stateProvider
       .state('index', {
         url: "/",
-        templateUrl: "dist/partials/index-state.html",
+        template: require("partials/index-state.html"),
         controller: indexController
       });
   }]);

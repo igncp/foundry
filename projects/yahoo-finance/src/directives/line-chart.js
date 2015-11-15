@@ -94,7 +94,7 @@ module.exports = [function() {
     scope: {
       data: '=',
     },
-    templateUrl: 'dist/partials/line-chart.directive.html',
+    template: require('partials/line-chart.directive.html'),
     link: function(scope, elem) {
       render(scope, elem);
       scope.$watch('data', () => render(scope, elem));

@@ -15,7 +15,7 @@ def clean():
 
   dirs_to_remove = [item for item in root_items
     if os.path.isdir(item) and item not in preserved_dirs]
-  files_to_remove = [file for file in ['index.html', 'projects.json']
+  files_to_remove = [file for file in ['index.html', 'foundry.json']
     if file in root_items and os.path.isfile(file)]
 
   for dir in dirs_to_remove: shutil.rmtree(dir)

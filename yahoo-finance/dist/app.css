@@ -1,0 +1,6 @@
+body {
+  margin: 0; }
+
+.directive-line-chart path.line {
+  fill: none;
+  stroke: black; }

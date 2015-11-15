@@ -1,0 +1,26 @@
+$primary: #69b590;
+$secondary: #da6e6e;
+$tertiary: #7e99d8;
+$shadow-color: #ccc;
+
+@mixin clearfix {
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+@mixin link-color($color) {
+  a {
+    &,
+    &:visited {
+      color: $color;
+    }
+    &:hover,
+    &:focus {
+      color: darken($color, 20%);
+      text-decoration: none;
+    }
+  }
+}

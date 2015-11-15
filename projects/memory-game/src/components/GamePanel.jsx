@@ -26,7 +26,7 @@ export default React.createClass({
   },
   render() {
     return (<div>
-      <p style={styles.title}>Still under construction</p>
+      <p style={styles.title}>Still under early construction</p>
       <ScorePanel />
       <Deck size={this.state.size}/>
     </div>);

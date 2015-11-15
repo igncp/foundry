@@ -37,5 +37,7 @@ const Main = React.createClass({
   }
 });
 
+foundryCommon.trackAnalytics();
+
 const mainNode = document.getElementById('main');
 ReactDOM.render(<Main/>, mainNode);

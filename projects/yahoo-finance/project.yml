@@ -1,0 +1,13 @@
+name: 'Yahoo Finance'
+url: 'yahoo-finance'
+only:
+  - index.html
+  - dist
+technologies:
+  - angular
+  - es6
+  - gulp
+  - ramda
+  - sass
+  - d3
+  - browserify

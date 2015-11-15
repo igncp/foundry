@@ -1,21 +1,24 @@
+import common from 'common/js/common.js';
 import scoreStore from 'stores/scoreStore.js';
 
 const styles = getStyles();
 
 export default React.createClass({
-  componentDidMount: function() {
-    this.unsubscribe = scoreStore.listen(this.onScoreChange);
-  },
-  componentWillUnmount: function() {
-    this.unsubscribe();
-  },
-  onScoreChange(score) {
+  mixins: [Reflux.listenTo(scoreStore,"onScoreChange")],
+  onScoreChange({score}) {
    this.setState({
     score: score,
-   })
+   });
+  },
+  onIndexClick(e) {
+    e.preventDefault();
+    common.goToIndex();
   },
   render() {
-    return (<div style={styles.panel}>Score: {this.state ? this.state.score : 0}</div>);
+    return (<div style={styles.panel}>
+      <p>Score: {this.state ? this.state.score : 0}</p>
+      <p><a href="#" onClick={this.onIndexClick}>index</a></p>
+    </div>);
   }
 });
 

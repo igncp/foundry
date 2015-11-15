@@ -32,36 +32,44 @@ const isFaceDownPred = R.propEq('isFaceDown', true);
 const turnDownADeck = R.map((card)=> card.isFaceDown = true);
 const getCardsUpOfADeck = R.filter(R.compose(R.not, isFaceDownPred));
 
+const generateDeck = (cardsNumber) => {
+  const deck = [];
+  const shuffledNumbersArr = generateShuffledArrayDoubledNumbers(cardsNumber);
+
+  for (let i = 0; i < cardsNumber; i++) {
+    deck.push({
+      id: i,
+      value: shuffledNumbersArr[i],
+      isFaceDown: true,
+      isSolved: false,
+    });
+  }
+  return deck;
+};
 
 export default Reflux.createStore({
   init() {
     this.listenTo(actions.generateDeck, this.onGenerateDeck);
-    this.listenTo(actions.handleCardClick, this.onHandleCardClick);
-  },
-  generateDeck(cardsNumber) {
-    const deck = [];
-    const shuffledNumbersArr = generateShuffledArrayDoubledNumbers(cardsNumber);
-
-    for (let i = 0; i < cardsNumber; i++) {
-      deck.push({
-        id: i,
-        value: shuffledNumbersArr[i],
-        isFaceDown: true,
-      });
-    }
-    return deck;
+    this.listenTo(actions.handleUnsolvedCardClick, this.onHandleCardClick);
   },
   onHandleCardClick(cardId) {
     const card = R.find(R.propEq('id', cardId), deck);
 
     if (card.isFaceDown === false) return;
 
-    const cardsUp = getCardsUpOfADeck(deck);
+    const cardsUpOriginaly = getCardsUpOfADeck(deck);
 
-    if (cardsUp.length === 0 || cardsUp.length === 1) {
+    if (cardsUpOriginaly.length === 0 || cardsUpOriginaly.length === 1) {
       card.isFaceDown = !card.isFaceDown;
-      if (cardsUp.length === 1) {
+      if (cardsUpOriginaly.length === 1) {
         setTimeout(()=> {
+          if (cardsUpOriginaly[0].value === card.value) {
+            actions.increaseScore(3);
+            cardsUpOriginaly[0].isSolved = true;
+            card.isSolved = true;
+          } else {
+            actions.decreaseScore(1);
+          }
           turnDownADeck(deck);
           this.onTrigger();
         }, 1000);
@@ -71,7 +79,7 @@ export default Reflux.createStore({
     }
   },
   onGenerateDeck(cardsNumber) {
-    deck = this.generateDeck(cardsNumber);
+    deck = generateDeck(cardsNumber);
     this.onTrigger();
   },
   onTrigger() {

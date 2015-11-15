@@ -1,4 +1,11 @@
-url: ''
+name: 'Foundry'
+url: '/'
 only:
   - 'index.html'
   - 'dist'
+technologies:
+  - gulp
+  - sass
+  - es6
+  - backbone
+  - browserify

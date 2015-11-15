@@ -62,7 +62,8 @@
   // Custom Globals
   "globals": {
     "R": false,
-    "_": false,
-    "Reflux": false
+    "angular": false,
+    "d3": false,
+    "moment": false
   }
 }

@@ -1,8 +1,11 @@
-import 'stores/scoreStore.js';
+import foundryCommon from 'common/js/common.js';
 
+import 'stores/scoreStore.js';
 import 'actions.js';
 
 import GamePanel from './components/GamePanel.jsx';
+
+foundryCommon.trackAnalytics();
 
 const Main = ()=> <GamePanel />;
 

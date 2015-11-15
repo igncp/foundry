@@ -9,12 +9,18 @@ export default React.createClass({
       isFaceDown: React.PropTypes.bool,
     }),
   },
+  onCardClick() {
+    if (this.props.card.isSolved !== true) {
+      actions.handleUnsolvedCardClick(this.props.card.id)
+    }
+  },
   render() {
     const isFaceDown = this.props.card.isFaceDown;
+    const isSolved = this.props.card.isSolved;
 
     return (<div
-      style={isFaceDown ? {...styles.card, ...styles.cardFaceDown} : styles.card}
-      onClick={()=> actions.handleCardClick(this.props.card.id)}>
+      style={{...styles.card, ...(isFaceDown ? styles.cardFaceDown : {}), ...(isSolved ? styles.cardSolved : {})}}
+      onClick={this.onCardClick}>
       {isFaceDown === false ? <p style={styles.number}>{this.props.card.value}</p> : null}
     </div>);
   }
@@ -31,7 +37,11 @@ function getStyles() {
       width: 100,
     },
     cardFaceDown: {
+      background: '#ACC8F3',
+    },
+    cardSolved: {
       background: '#9B9',
+      cursor: 'default',
     },
     number: {
       position: 'absolute',

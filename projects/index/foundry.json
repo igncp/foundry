@@ -1,0 +1,22 @@
+{
+    "projects": [{
+        "url": "menu",
+        "only": ["index.html", "dist"],
+        "location": "projects/menu",
+        "technologies": ["react", "es6", "webpack", "sass"],
+        "name": "Menu"
+    }, {
+        "url": "/",
+        "only": ["index.html", "dist"],
+        "location": "projects/index",
+        "technologies": ["gulp"],
+        "name": "Index"
+    }, {
+        "url": "memory-game",
+        "only": ["index.html", "dist"],
+        "location": "projects/memory-game",
+        "technologies": ["react", "es6", "webpack", "ramda", "reflux"],
+        "name": "Memory game"
+    }],
+    "last_commit": "e620c34fbb876bcfcba13421cdb26dbe6765effd"
+}

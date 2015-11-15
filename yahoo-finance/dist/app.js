@@ -95,7 +95,7 @@ module.exports = [function () {
     scope: {
       data: '='
     },
-    templateUrl: 'dist/partials/line-chart.directive.html',
+    template: require('partials/line-chart.directive.html'),
     link: function link(scope, elem) {
       render(scope, elem);
       scope.$watch('data', function () {
@@ -105,7 +105,7 @@ module.exports = [function () {
   };
 }];
 
-},{}],4:[function(require,module,exports){
+},{"partials/line-chart.directive.html":6}],4:[function(require,module,exports){
 'use strict';
 
 var router = require('./router');
@@ -116,7 +116,13 @@ var app = angular.module('app', ['ui.router']);
 directives.registerDirectives(app);
 router.configure(app);
 
-},{"./directives":2,"./router":5}],5:[function(require,module,exports){
+},{"./directives":2,"./router":7}],5:[function(require,module,exports){
+module.exports = "<h1>Still under early construction</h1>\n<div>\n    <line-chart data=\"results\"></line-chart>\n    <div ng-repeat=\"result in results\">{{result.Date}} - {{result.Symbol}} - Volume {{result.Volume}}</div>\n</div>";
+
+},{}],6:[function(require,module,exports){
+module.exports = "<div></div>";
+
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var indexController = require('controllers/index');
@@ -130,13 +136,13 @@ module.exports.configure = function (app) {
     $urlRouterProvider.otherwise('/');
     $stateProvider.state('index', {
       url: "/",
-      templateUrl: "dist/partials/index-state.html",
+      template: require("partials/index-state.html"),
       controller: indexController
     });
   }]);
 };
 
-},{"controllers/index":1}]},{},[4])
+},{"controllers/index":1,"partials/index-state.html":5}]},{},[4])
 
 
 //# sourceMappingURL=app.js.map

@@ -8,8 +8,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 (function (scope) {
   var common = {};
 
+  common.indexSegment = '/foundry';
+
   common.goToIndex = function () {
-    location.replace('/foundry');
+    location.replace(common.indexSegment);
   };
 
   common.trackAnalytics = function () {
@@ -104,12 +106,22 @@ module.exports = Projects;
 },{"app/models/Project":5}],5:[function(require,module,exports){
 'use strict';
 
+var _common = require('common/js/common');
+
+var _common2 = _interopRequireDefault(_common);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var Project = Backbone.Model.extend({
   initialize: function initialize(projectData) {
     this.set(projectData);
   },
   get: function get(attribute) {
-    return attribute === 'technologies' ? this.getTechnologies() : this.attributes[attribute];
+    return attribute === 'technologies' ? this.getTechnologies() : attribute === 'url' ? this.getUrl() : this.attributes[attribute];
+  },
+  getUrl: function getUrl() {
+    var url = this.attributes.url;
+    return url === '/' ? _common2.default.indexSegment : url;
   },
   getTechnologies: function getTechnologies() {
     return this.attributes.technologies.sort();
@@ -118,7 +130,7 @@ var Project = Backbone.Model.extend({
 
 module.exports = Project;
 
-},{}],6:[function(require,module,exports){
+},{"common/js/common":1}],6:[function(require,module,exports){
 'use strict';
 
 var ProjectsList = require('app/views/ProjectsList');

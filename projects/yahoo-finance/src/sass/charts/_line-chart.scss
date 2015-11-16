@@ -1,0 +1,16 @@
+.directive-line-chart {
+  path.line {
+    fill: none;
+    &.high {
+      stroke: #80A98A;
+    }
+    &.low {
+      stroke: #DCA2A2;
+    }
+  }
+  .domain {
+    stroke: #b0a4d6;
+    stroke-width: 1px;
+    fill: none;
+  }
+}

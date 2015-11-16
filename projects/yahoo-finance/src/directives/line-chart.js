@@ -1,7 +1,5 @@
-const render = function(scope, elem) {
-  const wrapper = d3.select(elem[0]);
-  wrapper.text('');
-
+const renderChart = function(scope, wrapper) {
+  const bodyDims = document.body.getBoundingClientRect();
   const data = angular.copy(scope.data);
 
   const margin = {
@@ -10,7 +8,8 @@ const render = function(scope, elem) {
     bottom: 30,
     left: 100
   };
-  const width = 860 - margin.left - margin.right;
+
+  const width = bodyDims.width - margin.left - margin.right - 100;
   const height = 500 - margin.top - margin.bottom;
   const parseDate = d3.time.format("%Y-%m-%d").parse;
 
@@ -22,20 +21,20 @@ const render = function(scope, elem) {
 
   var xAxis = d3.svg.axis()
     .scale(x)
-    .ticks(data.length)
+    .ticks(5)
     .orient("bottom");
 
   var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
 
-  var line = d3.svg.line()
-    .x(function(d) {
-      return x(d.date);
-    })
-    .y(function(d) {
-      return y(d.Volume);
-    });
+  var lineHigh = d3.svg.line()
+    .x(d => x(d.date))
+    .y(d => y(d.High));
+
+  var lineLow = d3.svg.line()
+    .x(d => x(d.date))
+    .y(d => y(d.Low));
 
   var svg = wrapper.append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -46,15 +45,18 @@ const render = function(scope, elem) {
 
   data.forEach(function(d) {
     d.date = parseDate(d.Date);
-    d.Volume = +d.Volume;
+    d.High = +d.High;
+    d.Low = +d.Low;
   });
+
+  const offset = 50;
+  const maxY = d3.max(data, d => d.High);
+  const minY = d3.min(data, d => d.Low);
 
   x.domain(d3.extent(data, function(d) {
     return d.date;
   }));
-  y.domain(d3.extent(data, function(d) {
-    return d.Volume;
-  }));
+  y.domain([minY - offset, maxY + offset]);
 
   svg.append("g")
     .attr("class", "x axis")
@@ -69,23 +71,51 @@ const render = function(scope, elem) {
     .attr("y", 6)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
-    .text("Volume");
+    .text("Value");
 
   svg.append("path")
     .datum(data)
-    .attr("class", "line")
-    .attr("d", line);
+    .attr("class", "line high")
+    .attr("d", lineHigh);
 
-  svg.append('g')
-    .selectAll('circle')
-    .data(data)
-    .enter()
-    .append("circle")
-    .attr({
-      cx: d => x(d.date),
-      cy: d => y(d.Volume),
-      r: 5
+  svg.append("path")
+    .datum(data)
+    .attr("class", "line low")
+    .attr("d", lineLow);
+
+  const maxItem = R.find(d => d.High === maxY)(data);
+  const minItem = R.find(d => d.Low === minY)(data);
+
+  const addExtremeCircle = function(item, prop, color, factor) {
+    const gEl = svg.append('g').attr({
+      transform: `translate(${x(item.date)},${y(item[prop]) + 4 * factor})`
     });
+    gEl.append("circle")
+      .attr({
+        r: 4,
+        fill: color,
+        cx: 0,
+        cy: 0,
+      });
+    gEl.append('title').text(item[prop].toFixed(2) + ' : ' + item.Date);
+  };
+
+  addExtremeCircle(maxItem, 'High', '#B3DEBC', -1);
+  addExtremeCircle(minItem, 'Low', '#FF8C8C', 1);
+};
+
+const renderSpinner = function(scope, wrapper) {
+  wrapper.append('div').attr({
+    'class': 'spinner',
+  });
+};
+
+const render = function(scope, elem) {
+  const wrapper = d3.select(elem[0]);
+  wrapper.text('');
+
+  if (scope.state === 'loading') renderSpinner(scope, wrapper);
+  else if (scope.state === 'displaying') renderChart(scope, wrapper);
 };
 
 module.exports = [function() {
@@ -93,11 +123,12 @@ module.exports = [function() {
     restrict: 'E',
     scope: {
       data: '=',
+      state: '=',
     },
     template: require('partials/line-chart.directive.html'),
     link: function(scope, elem) {
       render(scope, elem);
-      scope.$watch('data', () => render(scope, elem));
+      scope.$watch('state', () => render(scope, elem));
     }
   };
 }];

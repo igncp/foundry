@@ -1,3 +1,5 @@
-# foundry
+# Foundry
+Frontend examples using several technologies.
 
-frontend examples
+## Author and License
+Ignacio Carbajo - MIT

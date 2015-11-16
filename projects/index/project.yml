@@ -5,7 +5,7 @@ only:
   - 'dist'
 technologies:
   - gulp
-  - sass
+  - compass
   - es6
   - backbone
   - browserify

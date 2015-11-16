@@ -1,5 +1,10 @@
-<h1>Still under early construction</h1>
+<h1><i>Still under early construction</i></h1>
 <div>
-    <line-chart data="results"></line-chart>
-    <div ng-repeat="result in results">{{result.Date}} - {{result.Symbol}} - Volume {{result.Volume}}</div>
+    <p>From <strong>{{from.fromNow()}} ({{from.calendar()}})</strong> to <strong>{{to.fromNow()}} ({{to.format('h:mm:ss a')}})</strong> with <strong>{{symbol}}</strong>.</p>
+    <line-chart data="results" state="state"></line-chart>
+    <div ng-if="showStats">
+        <p>High - Low difference mean: <strong>{{stats.highLowMean.toFixed(2)}}</strong></p>
+        <p>High - Low difference maximum: <strong>{{stats.highLowMaxItem.value.toFixed(2)}}</strong> ({{stats.highLowMaxItem.Date}})</p>
+        <p>High - Low difference minimum: <strong>{{stats.highLowMinItem.value.toFixed(2)}}</strong> ({{stats.highLowMinItem.Date}})</p>
+    </div>
 </div>

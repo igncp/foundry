@@ -1,4 +1,4 @@
-const gulp = require('gulp');
+const path = require('path');
 
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
@@ -6,13 +6,19 @@ const browserify = require('browserify');
 const babelify = require('babelify');
 const stringify = require('stringify');
 
+const gulp = require('gulp');
 const sourcemaps = require('gulp-sourcemaps');
-const sass = require('gulp-sass');
+const compass = require('gulp-compass');
 const livereload = require('gulp-livereload');
 
 gulp.task('sass', () => {
   gulp.src('./src/sass/app.scss')
-    .pipe(sass().on('error', sass.logError))
+    .pipe(compass({
+      project: path.join(__dirname, '.'),
+      css: 'dist',
+      style: 'compressed',
+      sass: 'src/sass'
+    }))
     .pipe(gulp.dest('./dist'))
     .pipe(livereload());
 });
@@ -44,6 +50,7 @@ gulp.task('build', ['js', 'sass']);
 gulp.task('watch', ['build'], function() {
   livereload.listen();
   gulp.watch('./src/**/*.js', ['js']);
+  gulp.watch('./src/**/*.html', ['js']);
   gulp.watch('./src/sass/**/*.scss', ['sass']);
 });
 

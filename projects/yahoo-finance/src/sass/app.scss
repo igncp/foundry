@@ -1,10 +1,21 @@
+@import 'spinner';
+@import 'charts/line-chart';
+
 body {
+  font-family: 'Lato', sans-serif;
   margin: 0;
 }
 
-.directive-line-chart {
-  path.line {
-    fill: none;
-    stroke: black;
+a {
+  &,
+  &:hover,
+  &:visited,
+  &:focus {
+    color: #23a9c7;
+    text-decoration: none;
   }
+}
+
+#main {
+  margin: 50px;
 }

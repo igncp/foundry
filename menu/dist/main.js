@@ -136,8 +136,10 @@
 	(function (scope) {
 	  var common = {};
 
+	  common.indexSegment = '/foundry';
+
 	  common.goToIndex = function () {
-	    location.replace('/foundry');
+	    location.replace(common.indexSegment);
 	  };
 
 	  common.trackAnalytics = function () {

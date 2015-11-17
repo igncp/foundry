@@ -161,7 +161,7 @@ var ProjectsList = Backbone.View.extend({
     this.render();
   },
   rowTemplateFn: function rowTemplateFn() {
-    return _.template('<li class="row"><span class="col-sm-3 col-lg-2">' + '<a href="<%= get("url") %>"><%= get("name") %></a>' + '</span>' + '<span class="col-sm-8 col-lg-4"><%= get("technologies") ? get("technologies").join(" • ") : "" %></span>' + '<span class="col-sm-1 col-lg-4 show-code">' + '<a href="https://github.com/igncp/foundry/tree/' + this.last_commit + '/<%= get("location") %>">' + '<i class="fa fa-folder-open-o" title="code"></i>' + '</a>' + '</span></li>');
+    return _.template('<li class="row"><span class="col-sm-3 col-lg-2">' + '<a href="<%= get("url") %>"><%= get("name") %></a>' + '</span>' + '<span class="col-sm-8 col-lg-4"><%= get("technologies") ? get("technologies").join(" • ") : "" %></span>' + '<span class="col-sm-1 col-lg-4 show-code">' + '<a href="https://github.com/igncp/foundry/tree/' + this.data.last_commit + '/<%= get("location") %>">' + '<i class="fa fa-folder-open-o" title="code"></i>' + '</a>' + '</span></li>');
   },
   render: function render() {
     var rowTemplate = this.rowTemplateFn();

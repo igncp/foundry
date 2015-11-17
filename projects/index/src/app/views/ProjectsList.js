@@ -1,14 +1,11 @@
 const Projects = require('app/collections/Projects');
 
 const ProjectsList = Backbone.View.extend({
-  tagName: 'ul',
-  el: '#projects-list',
+  tagName: 'div',
   events: {},
-  initialize({
-    projects, last_commit
-  }) {
-    this.projects = new Projects(projects);
-    this.last_commit = last_commit;
+  initialize(opts) {
+    _.merge(this, opts);
+    this.projects = new Projects(this.data.projects);
     this.render();
   },
   rowTemplateFn() {
@@ -19,14 +16,17 @@ const ProjectsList = Backbone.View.extend({
       '<span class="col-sm-1 col-lg-4 show-code">' +
       '<a href="https://github.com/igncp/foundry/tree/' + this.last_commit + '/<%= get("location") %>">' +
       '<i class="fa fa-folder-open-o" title="code"></i>' +
-      '</a>' +
-      '</span></li>');
+      '</a>' + '</span></li>');
   },
   render() {
     const rowTemplate = this.rowTemplateFn();
-    this.$el.html(this.projects
-      .map((project) => rowTemplate(project))
-      .join(''));
+    
+    this.$el.html(`<div id="projects" class="col-sm-10 col-sm-offset-1">
+        <h3>Projects (${this.projects.length})</h3>
+        <ul id="projects-list">
+          ${this.projects.map(rowTemplate).join('')}
+        </ul>
+    </div>`);
     return this;
   }
 });

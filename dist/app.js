@@ -136,7 +136,10 @@ module.exports = Project;
 var ProjectsList = require('app/views/ProjectsList');
 
 module.exports = function () {
-  var view = new ProjectsList(this.app.data);
+  var view = new ProjectsList({
+    el: '#page',
+    data: this.app.data
+  });
 
   this.app.views.push({
     routeController: 'index',
@@ -150,15 +153,11 @@ module.exports = function () {
 var Projects = require('app/collections/Projects');
 
 var ProjectsList = Backbone.View.extend({
-  tagName: 'ul',
-  el: '#projects-list',
+  tagName: 'div',
   events: {},
-  initialize: function initialize(_ref) {
-    var projects = _ref.projects;
-    var last_commit = _ref.last_commit;
-
-    this.projects = new Projects(projects);
-    this.last_commit = last_commit;
+  initialize: function initialize(opts) {
+    _.merge(this, opts);
+    this.projects = new Projects(this.data.projects);
     this.render();
   },
   rowTemplateFn: function rowTemplateFn() {
@@ -166,9 +165,8 @@ var ProjectsList = Backbone.View.extend({
   },
   render: function render() {
     var rowTemplate = this.rowTemplateFn();
-    this.$el.html(this.projects.map(function (project) {
-      return rowTemplate(project);
-    }).join(''));
+
+    this.$el.html('<div id="projects" class="col-sm-10 col-sm-offset-1">\n        <h3>Projects (' + this.projects.length + ')</h3>\n        <ul id="projects-list">\n          ' + this.projects.map(rowTemplate).join('') + '\n        </ul>\n    </div>');
     return this;
   }
 });

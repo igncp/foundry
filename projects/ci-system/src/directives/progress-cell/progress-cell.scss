@@ -1,0 +1,86 @@
+@import 'constants/colors';
+
+@mixin status-colors($status, $color) {
+  &.status-#{$status} {
+    .circle-inner {
+      background-color: $color;
+    }
+    .line-inner {
+      background-color: $color;
+    }
+  }
+}
+
+.directive-progress-cell {
+  $circle-radius: 20px;
+  $circle-inner-radius: 15px;
+  $line-width: 1000px;
+  $line-height: 10px;
+  $line-inner-height: 4px;
+  @each $state-colors-pair in $state-colors-pairs {
+    @include status-colors(nth($state-colors-pair, 1), nth($state-colors-pair, 2));
+  }
+  .centered {
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    width: 1px;
+  }
+  .circle {
+    background-color: #ddd;
+    border-radius: 50px;
+    display: inline-block;
+    height: $circle-radius * 2;
+    left: -$circle-radius;
+    position: absolute;
+    top: -$circle-radius;
+    width: $circle-radius * 2;
+    z-index: 5;
+  }
+  .circle-inner {
+    border-radius: 50px;
+    display: inline-block;
+    height: $circle-inner-radius * 2;
+    left: -$circle-inner-radius;
+    position: absolute;
+    top: -$circle-inner-radius;
+    width: $circle-inner-radius * 2;
+    z-index: 10;
+  }
+  .line {
+    background-color: #ddd;
+    display: inline-block;
+    height: $line-height;
+    position: absolute;
+    top: -$line-height / 2;
+    width: $line-width;
+    z-index: 0;
+  }
+  .line-inner {
+    display: inline-block;
+    height: $line-inner-height;
+    position: absolute;
+    top: -$line-inner-height / 2;
+    width: $line-width;
+    z-index: 10;
+  }
+  .line-left,
+  .line-inner-left {
+    right: 0;
+  }
+  .line-right,
+  .line-inner-right {
+    left: 0;
+  }
+  .icon i {
+    color: white;
+    left: -7px;
+    position: absolute;
+    text-shadow: 0 0 5px rgba(0,0,0,.4);
+    top: -8px;
+    z-index: 20;
+    &.fa-exclamation {
+      left: -3;
+    }
+  }
+}

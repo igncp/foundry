@@ -1,0 +1,13 @@
+<div class="directive-progress-cell status-{{build.get('status')}}">
+    <div class="centered">
+        <div ng-if="isLineLeftDisplayed" class="line line-left"></div>
+        <div ng-if="isLineInnerLeftDisplayed" class="line-inner line-inner-left"></div>
+        <div class="circle"></div>
+        <div ng-if="isInnerCircleDisplayed" class="circle-inner"></div>
+        <div ng-if="isIconDisplayed" class="icon">
+            <i class="fa fa-{{iconDisplayed}}"></i>
+        </div>
+        <div ng-if="isLineRightDisplayed" class="line line-right"></div>
+        <div ng-if="isLineInnerRightDisplayed" class="line-inner line-inner-right"></div>
+    </div>
+</div>

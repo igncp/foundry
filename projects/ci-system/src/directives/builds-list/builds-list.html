@@ -1,0 +1,31 @@
+<table class="table directive-builds-list">
+    <thead>
+        <tr>
+            <th>Changelist</th>
+            <th>Owner</th>
+            <th>Time Started</th>
+            <th ng-repeat="possibleState in possibleStates.toArray()">{{possibleState.get('text')}}</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-click="expandOrCollapse(build)" ng-repeat-start="build in parsedBuilds.toArray()" class="status-{{build.get('status')}} build-{{build.get('isExpanded') ? 'expanded' : 'collapsed'}}">
+            <td class="colored">{{build.get('changelist')}}</td>
+            <td class="colored">{{build.get('owner')}}</td>
+            <td class="colored">{{build.get('started_on_date')}}
+                <clock-time timestamp="build.get('started_on')"></clock-time>
+            </td>
+            <td ng-repeat="possibleState in possibleStates.toArray()" class="colored progress-cell">
+                <state-display cell-state="possibleState" build="build"></state-display>
+            </td>
+            <td rowspan="{{build.get('isExpanded') ? 2 : 1}}" class="status-text">
+                <i class="fa fa-{{build.get('status_icon')}}"></i> {{build.get('status_text')}}
+            </td>
+        </tr>
+        <tr ng-click="expandOrCollapse(build)" ng-if="build.get('isExpanded')" ng-repeat-end>
+            <td colspan="{{3 + possibleStates.toArray().length}}">
+                <expanded-build build="build"></expanded-build>
+            </td>
+        </tr>
+    </tbody>
+</table>

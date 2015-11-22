@@ -1,0 +1,10 @@
+@import 'constants/colors';
+
+#main {
+  font-family: 'Roboto', sans-serif;
+  min-height: 100%;
+  padding-top: 20px;
+}
+body {
+  background-color: $light-grey;
+}

@@ -1,7 +1,7 @@
 $primary: #69b590;
 $secondary: #da6e6e;
 $tertiary: #7e99d8;
-$shadow-color: #ccc;
+$shadow-color: rgba(0,0,0,.1);
 
 @mixin clearfix {
   &:after {

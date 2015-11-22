@@ -1,0 +1,13 @@
+name: 'CI System'
+url: 'ci-system'
+only:
+  - index.html
+  - dist
+  - data
+technologies:
+  - angular
+  - gulp
+  - sass
+  - d3
+  - browserify
+  - immutable

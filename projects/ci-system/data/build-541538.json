@@ -1,0 +1,17 @@
+{
+  "build": {
+    "completed": 541531,
+    "debug": "http://foo.bar.com/debug",
+    "release": "http://foo.bar.com/release"
+  },
+  "unit": {
+    "success": 301,
+    "warning": 63,
+    "miliseconds": 30222
+  },
+  "functional": {
+    "success": 31101,
+    "warning": 323,
+    "miliseconds": 2030412
+  }
+}

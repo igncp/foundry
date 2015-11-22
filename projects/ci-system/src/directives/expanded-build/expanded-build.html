@@ -1,0 +1,41 @@
+<div class="directive-expanded-build row">
+    <div class="build-state col-lg-3 build-status-{{buildIconStatus}}">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-2">
+                <p>Build <span class="title-icon"><i class="fa fa-{{buildIcon}}"></i></span></p>
+                <p ng-if="buildClockTime">
+                    <clock-time timestamp="buildClockTime"></clock-time>
+                </p>
+            </div>
+            <div ng-if="build.getIn(['expandedData', 'build', 'debug'])" class="col-lg-2">
+                <p><i class="fa fa-folder-o"></i></p>
+                <p><a href="{{build.getIn(['expandedData', 'build', 'debug'])}}">debug</a></p>
+            </div>
+            <div ng-if="build.getIn(['expandedData', 'build', 'release'])" class="col-lg-2">
+                <p><i class="fa fa-folder-o"></i></p>
+                <p><a href="{{build.getIn(['expandedData', 'build', 'release'])}}">release</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 test-status-{{test.status}}" ng-repeat="test in tests.toArray() track by $index">
+        <div class="arrow-separator"><i class="fa fa-angle-right"></i></div>
+        <div class="row">
+            <div class="col-lg-5">
+                <p>{{test.text}} <span class="title-icon"><i class="fa fa-{{test.icon}}"></i></span></p>
+                <p ng-if="test.percentage || test.percentage === 0">{{test.percentage}}%</p>
+                <div ng-if="test.status === 'waiting' || test.status === 'forbidden'">
+                    <p class="status-message">Status: <span class="status-keyword {{test.status}}-keyword"><strong>{{test.status === 'waiting' ? 'Waiting' : "Can't run"}}</strong></span></p>
+                </div>
+                <div ng-if="test.status === 'pending'">
+                    <p><strong>Pending</strong></p>
+                </div>
+            </div>
+            <div ng-if="test.values" class="col-lg-4">
+                <pie-chart values="test.values"></pie-chart>
+            </div>
+            <div ng-if="test.values" class="col-lg-3">
+                <chronometer-time miliseconds="build.getIn(['expandedData', test.type, 'miliseconds'])"></chronometer-time>
+            </div>
+        </div>
+    </div>
+</div>

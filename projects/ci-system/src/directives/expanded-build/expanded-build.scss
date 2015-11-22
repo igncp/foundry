@@ -1,0 +1,38 @@
+@import 'constants/colors';
+
+.directive-expanded-build {
+  min-height: 90px;
+  @mixin statusColors($status, $color) {
+    .build-status-#{$status},
+    .test-status-#{$status} {
+      .title-icon i {
+        color: $color;
+      }
+    }
+  }
+  @each $state-colors-pair in $state-colors-pairs {
+    @include statusColors(nth($state-colors-pair, 1), nth($state-colors-pair, 2));
+  }
+  @include statusColors('forbidden', $error-color);
+  .build-icon {
+    margin-left: 4px;
+  }
+  .build-state {
+    position: relative;
+  }
+  .arrow-separator {
+    color: $light-grey;
+    font-size: 90px;
+    left: -20px;
+    position: absolute;
+    top: 0;
+  }
+  .status-message .status-keyword {
+    &.waiting-keyword {
+      color: #aa74ad;
+    }
+    &.forbidden-keyword {
+      color: $error-color;
+    }
+  }
+}

@@ -9,12 +9,10 @@ body {
   @include link-color($primary);
 }
 
-* {
-  transition: all .2s linear;
-}
-
 #container {
+  background-color: #f2f7f4;
   header {
+    background-color: #fff;
     border-bottom: 1px solid $shadow-color;
     padding-bottom: 10px;
 
@@ -50,6 +48,7 @@ body {
 }
 
 footer {
+  background-color: #fff;
   border-top: 1px solid $shadow-color;
   p {
     font-size: 30px;

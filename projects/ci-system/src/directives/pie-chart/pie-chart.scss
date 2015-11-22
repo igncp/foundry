@@ -1,0 +1,14 @@
+@import 'constants/colors';
+
+.directive-pie-chart {
+  .arc-0 {
+    fill: $warning-color;
+  }
+  .arc-1 {
+    fill: $success-color;
+  }
+  .arc {
+    stroke: #ddd;
+    stroke-width: 2px;
+  }
+}

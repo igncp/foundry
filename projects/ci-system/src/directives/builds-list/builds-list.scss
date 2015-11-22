@@ -1,0 +1,58 @@
+@import 'constants/colors';
+
+.directive-builds-list {
+  border: solid 1px #ddd;
+  transition: linear .3s all;
+  td,
+  th {
+    background-color: #fff;
+    text-align: center;
+  }
+  tbody td {
+    cursor: pointer;
+    padding: 10px 0 !important;
+    vertical-align: middle !important;
+  }
+  &:hover {
+    box-shadow: 0 0 10px 1px rgba(0,0,0,.1);
+  }
+  th {
+    height: 80px;
+    vertical-align: middle !important;
+  }
+  td.progress-cell {
+    height: 80px;
+    overflow: hidden;
+  }
+  @mixin colored($status, $color) {
+    &.build-expanded {
+      &.status-#{$status} td.colored {
+        box-shadow: inset 0 7px 0px -2px $color;
+      }
+    }
+    &.build-collapsed {
+      &.status-#{$status} {
+        border-left-color: $color;
+      }
+    }
+    &.status-#{$status} {
+      td.status-text {
+        color: $color;
+      }
+    }
+  }
+  tr {
+    border-left-color: #ccc;
+    border-left-style: solid;
+    border-left-width: 5px;
+    @each $state-colors-pair in $state-colors-pairs {
+      @include colored(nth($state-colors-pair, 1), nth($state-colors-pair, 2));
+    }
+    &.build-expanded {
+      td.status-text {
+        background-color: $light-grey;
+        border-left: solid 1px #ccc;
+      }
+    }
+  }
+}

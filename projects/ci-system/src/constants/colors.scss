@@ -1,0 +1,11 @@
+$warning-color: #f7ab57;
+$success-color: #1ab394;
+$error-color: #eb3e50;
+$running-color: #2087c6;
+$light-grey: #f7f7f7;
+$state-colors-pairs: (
+  ('success', $success-color),
+  ('running', $running-color),
+  ('pending', $warning-color),
+  ('error', $error-color)
+);

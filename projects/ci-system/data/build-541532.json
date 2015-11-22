@@ -1,0 +1,8 @@
+{
+  "build": {
+    "completed": 1431109922,
+    "debug": "http://foo.bar.com/debug",
+    "release": "http://foo.bar.com/release"
+  },
+  "unit": {}
+}

@@ -12,8 +12,8 @@ const ProjectsList = Backbone.View.extend({
     return _.template('<li class="row"><span class="col-sm-3 col-lg-2">' +
       '<a href="<%= get("url") %>"><%= get("name") %></a>' +
       '</span>' +
-      '<span class="col-sm-8 col-lg-4"><%= get("technologies") ? get("technologies").join(" • ") : "" %></span>' +
-      '<span class="col-sm-1 col-lg-4 show-code">' +
+      '<span class="col-sm-8 col-lg-6"><%= get("technologies") ? get("technologies").join(" • ") : "" %></span>' +
+      '<span class="col-sm-1 col-lg-2 show-code">' +
       '<a href="https://github.com/igncp/foundry/tree/' + this.data.last_commit + '/<%= get("location") %>">' +
       '<i class="fa fa-folder-open-o" title="code"></i>' +
       '</a>' + '</span></li>');

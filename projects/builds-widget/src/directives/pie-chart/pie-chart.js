@@ -6,10 +6,6 @@ require('./pie-chart.scss');
  * @param  {Object} elem angular's elem object
  */
 function renderChart(values, elem) {
-  var height = 100;
-  var width = 100;
-  var radius = 50;
-
   var segments = values.map(function(value, index) {
     return {
       value: value,
@@ -17,8 +13,11 @@ function renderChart(values, elem) {
     };
   }).toJS();
 
-  var domElem = angular.element(elem);
-  var d3Elem = d3.select(domElem[0].childNodes[0]);
+  var domElem = angular.element(elem)[0];
+  var d3Elem = d3.select(domElem.childNodes[0]);
+  var width = domElem.parentNode.getBoundingClientRect().width;
+  var height = width;
+  var radius = Math.floor(width / 2);
   d3Elem.text('');
 
   var arc = d3.svg.arc()

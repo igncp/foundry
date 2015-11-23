@@ -5,13 +5,13 @@
     "release": "http://foo.bar.com/release"
   },
   "unit": {
-    "success": 301,
-    "warning": 63,
+    "success": 402,
+    "warning": 163,
     "miliseconds": 30222
   },
   "functional": {
     "success": 31101,
-    "warning": 323,
+    "warning": 32123,
     "miliseconds": 2030412
   }
 }

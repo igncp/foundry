@@ -1,10 +1,9 @@
 server:
-	./node_modules/.bin/http-server -p 8082 -s -c-1
+	npm start
 
 watch:
 	rm -rf dist
 	./node_modules/.bin/gulp
 
 build: 
-	rm -rf dist
-	./node_modules/.bin/gulp build
+	npm run build

@@ -1,19 +1,19 @@
 @import 'constants/colors';
-
-.directive-expanded-build {
-  min-height: 90px;
-  @mixin statusColors($status, $color) {
-    .build-status-#{$status},
-    .test-status-#{$status} {
-      .title-icon i {
-        color: $color;
-      }
+@mixin statusColors($status, $color) {
+  .build-status-#{$status},
+  .test-status-#{$status} {
+    .title-icon i {
+      color: $color;
     }
   }
+}
+.directive-expanded-build {
+  min-height: 90px;
+
+  @include statusColors('forbidden', $error-color);
   @each $state-colors-pair in $state-colors-pairs {
     @include statusColors(nth($state-colors-pair, 1), nth($state-colors-pair, 2));
   }
-  @include statusColors('forbidden', $error-color);
   .build-icon {
     margin-left: 4px;
   }
@@ -33,6 +33,18 @@
     }
     &.forbidden-keyword {
       color: $error-color;
+    }
+  }
+  .tests-value {
+    display: inline-block;
+    height: 10px;
+    margin-right: 10px;
+    width: 10px;
+    &.warning-tests {
+      background-color: $warning-color;
+    }
+    &.success-tests {
+      background-color: $success-color;
     }
   }
 }

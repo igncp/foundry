@@ -1,7 +1,5 @@
 {
   "build": {
-    "completed": 541531,
-    "debug": "http://foo.bar.com/debug",
-    "release": "http://foo.bar.com/release"
+    "completed": 541531
   }
 }

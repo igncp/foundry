@@ -9,9 +9,5 @@
     "warning": 63,
     "miliseconds": 30222
   },
-  "functional": {
-    "success": 31101,
-    "warning": 323,
-    "miliseconds": 2030412
-  }
+  "functional": {}
 }

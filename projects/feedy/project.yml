@@ -1,0 +1,14 @@
+name: 'Feedy'
+url: 'feedy'
+only:
+  - index.html
+  - dist
+technologies:
+  - react
+  - react-router
+  - es6
+  - ramda
+  - redux
+  - immutable
+  - webpack
+  - sass

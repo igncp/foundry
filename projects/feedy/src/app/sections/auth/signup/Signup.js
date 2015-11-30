@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, } from 'react-router';
+import Immutable from  'immutable';
 
 import AppComponent from 'components/AppComponent';
 import { signupUser, } from 'helpers/user';
@@ -31,7 +32,10 @@ class Signup extends AppComponent {
     this.unsubscribeFromAppStore();
   }
   handleButtonClick() {
-    signupUser({});
+    signupUser(Immutable.fromJS({
+      userName: this.state.data.get('userName'),
+      password: this.state.data.get('password'),
+    }));
     
     this.setData({
       userName: '',

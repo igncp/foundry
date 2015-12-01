@@ -7,8 +7,6 @@ technologies:
   - react
   - react-router
   - es6
-  - ramda
   - redux
   - immutable
   - webpack
-  - sass

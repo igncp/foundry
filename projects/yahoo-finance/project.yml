@@ -7,7 +7,6 @@ technologies:
   - angular
   - es6
   - gulp
-  - ramda
   - sass
   - d3
   - browserify

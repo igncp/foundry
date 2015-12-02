@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, } from 'react-router';
 import Immutable from  'immutable';
 
@@ -11,16 +10,14 @@ class Signup extends AppComponent {
     const appState = appStoreModule.getState();
 
     return {
-      userName: '',
+      username: '',
       password: '',
       passwordC: '',
       user: appState.user,
     };
   }
   componentDidMount() {
-    const appStore = appStoreModule.get();
-
-    this.unsubscribeFromAppStore = appStore.subscribe(()=> {
+    this.unsubscribeFromAppStore = appStoreModule.get().subscribe(()=> {
       const appState = appStoreModule.getState();
 
       this.setData({
@@ -33,12 +30,12 @@ class Signup extends AppComponent {
   }
   handleButtonClick() {
     signupUser(Immutable.fromJS({
-      userName: this.state.data.get('userName'),
+      username: this.state.data.get('username'),
       password: this.state.data.get('password'),
     }));
     
     this.setData({
-      userName: '',
+      username: '',
       password: '',
       passwordC: '',
     });
@@ -52,8 +49,8 @@ class Signup extends AppComponent {
       <div>
         <p>Username:
           <input
-            onChange={event=> this.setData(data.set('userName', event.target.value))}
-            value={data.get('userName')}
+            onChange={event=> this.setData(data.set('username', event.target.value))}
+            value={data.get('username')}
           />
         </p>
         <p>Password:

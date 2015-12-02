@@ -3,7 +3,8 @@
  * a random (low) latency.
  */
 
-import {getRandomInt, } from './helpers/math';
+import { getRandomInt, } from './helpers/math';
+import routes from './api/routes';
 
 const latencyMilisecondsInterval = [100, 800,];
 
@@ -14,12 +15,14 @@ const createRequestDispatcher = (method)=> {
     return new Promise((resolve)=> {
       setTimeout(()=> {
         try {
-          const result = requestDispatcher[method][url](params);
+          const result = routes.getIn([method, url,])(params);
+
           resolve({
             data: result,
             error: false,
           });
-        } catch(e) {
+        } catch (e) {
+          console.warn('feedy server error -> ', e);
           resolve({
             error: e,
           });
@@ -36,13 +39,3 @@ server.post = createRequestDispatcher('post');
 server.put = createRequestDispatcher('put');
 
 export default server;
-
-const requestDispatcher = {
-  put: {},
-  get: {},
-  post: {},
-};
-
-requestDispatcher.post['user'] = (params)=> {
-  return true;
-};

@@ -9,7 +9,7 @@ export default function counter(state, action) {
     case userActions.SIGNUP_START:
       return state.set('type', 'pending');
     case userActions.SIGNUP_END:
-      return state.set('type', 'anonymous');
+      return action.payload || state.set('type', 'anonymous');
     default:
       return Immutable.fromJS({
         type: 'anonymous',

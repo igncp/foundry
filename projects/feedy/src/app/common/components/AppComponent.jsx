@@ -12,7 +12,10 @@ import Immutable from 'immutable';
 export default class AppComponent extends React.Component {
   constructor(props) {
     super(props);
-    const initData = Immutable.fromJS(this.getDefaultData());
+
+    const defaultData = this.getDefaultData ? this.getDefaultData() : {};
+    const initData = Immutable.fromJS(defaultData);
+
     this._data = initData;
 
     this.state = {

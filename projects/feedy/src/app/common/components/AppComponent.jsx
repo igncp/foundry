@@ -32,4 +32,7 @@ export default class AppComponent extends React.Component {
       data: newData,
     });
   }
+  getData() {
+    return this._data;
+  }
 }

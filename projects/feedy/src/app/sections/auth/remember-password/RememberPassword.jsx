@@ -1,12 +1,13 @@
 import React from 'react';
-import { Link, } from 'react-router';
+
+import MainLayout from 'layouts/Main';
 
 class RememberPassword extends React.Component {
   render() {
-    return (<div>
-      <p>remember password</p>
-      <p><Link to="/">index</Link></p>
-    </div>);
+    return (<MainLayout>
+      <h2>Remember password</h2>
+      <p>Enter your username: <input/> <input className="btn btn-info" type="button" value="Remember"/></p>
+    </MainLayout>);
   }
 }
 

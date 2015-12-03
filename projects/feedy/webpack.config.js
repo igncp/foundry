@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 
+const LiveReloadPlugin = require('webpack-livereload-plugin');
+
 module.exports = {
   entry: ['./src/main.jsx',],
   output: {
@@ -37,6 +39,7 @@ module.exports = {
         warnings: false,
       },
     }),
+    new LiveReloadPlugin(),
   ],
   sassLoader: {
     includePaths: [__dirname + '/src',],

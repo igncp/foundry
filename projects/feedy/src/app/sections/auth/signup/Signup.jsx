@@ -1,18 +1,21 @@
-import { Link, } from 'react-router';
 import Immutable from  'immutable';
+import R from 'ramda';
 
 import AppComponent from 'components/AppComponent';
+import MainLayout from 'layouts/Main';
 import { signupUser, } from 'helpers/user';
+import getEmptyStrPropsObj from 'pure/getEmptyStrPropsObj';
 import * as appStoreModule from 'store/app';
+
+const textInputs = ['username', 'password', 'passwordC', ];
+const emptyInputsObj = getEmptyStrPropsObj(textInputs);
 
 class Signup extends AppComponent {
   getDefaultData() {
     const appState = appStoreModule.getState();
 
     return {
-      username: '',
-      password: '',
-      passwordC: '',
+      ...emptyInputsObj,
       user: appState.user,
     };
   }
@@ -34,20 +37,23 @@ class Signup extends AppComponent {
       password: this.state.data.get('password'),
     }));
     
-    this.setData({
-      username: '',
-      password: '',
-      passwordC: '',
-    });
+    this.setData(emptyInputsObj);
+  }
+  isFormValid() {
+    const isAnyInputEmpty = R.any(
+      R.compose(R.isEmpty, input => this.state.data.get(input))
+    )(textInputs);
+
+    return !isAnyInputEmpty;
   }
   render() {
     const data = this.state.data;
     const user = data.get('user');
 
-    return (<div>
-      <p>signup</p>
+    return (<MainLayout>
+      <h2>Signup</h2>
       <div>
-        <p>Username:
+        <p>Username: 
           <input
             onChange={event=> this.setData(data.set('username', event.target.value))}
             value={data.get('username')}
@@ -60,7 +66,7 @@ class Signup extends AppComponent {
             value={data.get('password')}
           />
         </p>
-        <p>Password Confirmation:
+        <p>Password Confirmation: 
           <input
             onChange={event=> this.setData(data.set('passwordC', event.target.value))}
             type="password"
@@ -68,8 +74,10 @@ class Signup extends AppComponent {
           />
         </p>
         <p>
-          {user.get('type') === 'anonymous' ? 
+          {user.get('type') !== 'pending' ? 
             <input
+              className='btn btn-default'
+              disabled={!this.isFormValid()}
               onClick={()=> this.handleButtonClick()}
               type="button"
               value="Enter"
@@ -77,8 +85,7 @@ class Signup extends AppComponent {
             <span>Pending...</span> : null}
         </p>
       </div>
-      <p><Link to="/">index</Link></p>
-    </div>);
+    </MainLayout>);
   }
 }
 

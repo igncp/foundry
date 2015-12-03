@@ -6,11 +6,11 @@ class Index extends React.Component {
     // const store = appStore.get();
 
     return (<div>
-      <p>Login</p>
+      <p>Enter your credentials</p>
       <div>
         <p>Username: <input/></p>
         <p>Password: <input type="password"/></p>
-        <p><input type="button" value="Enter"/></p>
+        <p><input className="btn btn-default" type="button" value="Enter"/></p>
       </div>
       <p><Link to="signup">Sign up</Link></p>
       <p><Link to="remember-password">Remember password</Link></p>

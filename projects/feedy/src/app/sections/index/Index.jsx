@@ -4,21 +4,17 @@ import * as appStoreModule from 'store/app';
 
 import Anonymous from './sections/anonymous/Anonymous';
 import Authenticated from './sections/authenticated/Authenticated';
-import purgeDatabase from 'helpers/purgeDatabase';
+import MainLayout from 'layouts/Main';
 
 class Index extends React.Component {
   render() {
     const appState = appStoreModule.getState();
 
-    return (<div>
-      <h1>Feedy <small>Under construction</small></h1>
+    return (<MainLayout>
       {appState.user.get('type') === 'authenticated' ? 
         <Authenticated/> :
         <Anonymous/>}
-      <footer>
-        <p>this application uses LocalStorage. To purge the stored Feedy values, <a href="" onClick={purgeDatabase}>click here</a>.</p>
-      </footer>
-    </div>);
+    </MainLayout>);
   }
 }
 Index.displayName = 'Index';

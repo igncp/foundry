@@ -70,6 +70,9 @@
         "node": true
     },
     "globals": {
-        "Rx": false
+        "Rx": false,
+        "describe": false,
+        "expect": false,
+        "it": false
     }
 }

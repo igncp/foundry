@@ -12,7 +12,7 @@ const createRequestDispatcher = (method)=> {
   return (url, params)=> {
     const latency = getRandomInt(...latencyMilisecondsInterval);
 
-    return new Promise((resolve)=> {
+    return new Promise((resolve, reject)=> {
       setTimeout(()=> {
         try {
           const result = routes.getIn([method, url,])(params);
@@ -23,7 +23,7 @@ const createRequestDispatcher = (method)=> {
           });
         } catch (e) {
           console.warn('feedy server error -> ', e);
-          resolve({
+          reject({
             error: e,
           });
         }

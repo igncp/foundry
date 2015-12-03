@@ -6,7 +6,7 @@
 
 import Immutable from 'immutable';
 
-const keyPrefix = '@foundyFeedy';
+const keyPrefix = '@foundryFeedy';
 
 const getKeyStr = (keysArr)=> {
   if (!keysArr || keysArr.length === 0) return null;

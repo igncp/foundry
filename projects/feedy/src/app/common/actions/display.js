@@ -1,8 +1,19 @@
 export const TOAST = 'toast';
 
-export function toast(message) {
+/**
+ * @param  {Object} opts toast message options
+ * @param  {string} opts.type 'success', 'error', 'warning'
+ */
+export function toast(opts) {
   return {
     type: TOAST,
-    payload: message,
+    payload: opts,
+  };
+}
+
+export function toastError(opts) {
+  return {
+    type: TOAST,
+    payload: {type: 'error', ...opts, },
   };
 }

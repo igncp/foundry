@@ -2,5 +2,6 @@ node_modules
 bower_components
 *.pyc
 .sass-cache
+*.map
 /common
 /projects

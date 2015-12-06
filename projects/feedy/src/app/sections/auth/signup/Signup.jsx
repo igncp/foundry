@@ -1,8 +1,10 @@
 import Immutable from  'immutable';
 import R from 'ramda';
 
-import AppComponent from 'components/AppComponent';
 import MainLayout from 'layouts/Main';
+import AppComponent from 'components/AppComponent';
+import TextishInput from 'components/form/TextishInput';
+
 import { signupUser, } from 'helpers/user';
 import getEmptyStrPropsObj from 'pure/getEmptyStrPropsObj';
 import * as appStoreModule from 'store/app';
@@ -36,15 +38,18 @@ class Signup extends AppComponent {
       username: this.state.data.get('username'),
       password: this.state.data.get('password'),
     }));
-    
+
     this.setData(emptyInputsObj);
   }
   isFormValid() {
-    const isAnyInputEmpty = R.any(
-      R.compose(R.isEmpty, input => this.state.data.get(input))
-    )(textInputs);
+    const data = this.state.data;
 
-    return !isAnyInputEmpty;
+    const isAnyInputEmpty = R.any(
+      R.compose(R.isEmpty, input => data.get(input))
+    )(textInputs);
+    const passwordsMatch = data.get('password') === data.get('passwordC');
+
+    return !isAnyInputEmpty && passwordsMatch;
   }
   render() {
     const data = this.state.data;
@@ -53,35 +58,41 @@ class Signup extends AppComponent {
     return (<MainLayout>
       <h2>Signup</h2>
       <div>
-        <p>Username: 
-          <input
+        <div>
+          <TextishInput
             onChange={event=> this.setData(data.set('username', event.target.value))}
+            text="Username"
             value={data.get('username')}
           />
-        </p>
-        <p>Password:
-          <input
+        </div>
+        <div>
+          <TextishInput
             onChange={event=> this.setData(data.set('password', event.target.value))}
+            text="Password"
             type="password"
             value={data.get('password')}
           />
-        </p>
-        <p>Password Confirmation: 
-          <input
+        </div>
+        <div>
+          <TextishInput
             onChange={event=> this.setData(data.set('passwordC', event.target.value))}
+            text="Password Confirmation"
             type="password"
             value={data.get('passwordC')}
           />
-        </p>
+          {data.get('passwordC') && data.get('passwordC') !== data.get('password') &&
+            <p>Passwords do not match</p>
+          }
+        </div>
         <p>
-          {user.get('type') !== 'pending' ? 
+          {user.get('type') !== 'pending' ?
             <input
               className='btn btn-default'
               disabled={!this.isFormValid()}
               onClick={()=> this.handleButtonClick()}
               type="button"
               value="Enter"
-            /> : user.get('type') === 'pending' ? 
+            /> : user.get('type') === 'pending' ?
             <span>Pending...</span> : null}
         </p>
       </div>

@@ -1,16 +1,51 @@
 import React from 'react';
 import { Link, } from 'react-router';
+import toastr from 'toastr/toastr';
 
-class Index extends React.Component {
+import AppComponent from 'components/AppComponent';
+import TextishInput from 'components/form/TextishInput';
+
+import {getUserByCredentials, } from 'api/user';
+import {login, } from 'actions/user';
+import {mask, unmask, } from 'actions/display';
+
+class Anonymous extends AppComponent {
+  login() {
+    const data = this.state.data;
+    mask('Pending...');
+    getUserByCredentials({
+      username: data.get('username'),
+      password: data.get('password'),
+    }).then((user)=> {
+      unmask();
+      if (user) {
+        toastr.info('Login successful');
+        login(user);
+      }
+    });
+  }
   render() {
-    // const store = appStore.get();
+    const data = this.state.data;
 
     return (<div>
       <p>Enter your credentials</p>
       <div>
-        <p>Username: <input/></p>
-        <p>Password: <input type="password"/></p>
-        <p><input className="btn btn-default" type="button" value="Enter"/></p>
+        <div>
+          <TextishInput
+            onChange={event=> this.setData(data.set('username', event.target.value))}
+            text="Username"
+            value={data.get('username')}
+          />
+        </div>
+        <div>
+          <TextishInput
+            onChange={event=> this.setData(data.set('password', event.target.value))}
+            text="Password"
+            type="password"
+            value={data.get('password')}
+          />
+        </div>
+        <p><input className="btn btn-default" onClick={()=> this.login()} type="button" value="Enter"/></p>
       </div>
       <p><Link to="signup">Sign up</Link></p>
       <p><Link to="remember-password">Remember password</Link></p>
@@ -18,4 +53,4 @@ class Index extends React.Component {
   }
 }
 
-module.exports = Index;
+module.exports = Anonymous;

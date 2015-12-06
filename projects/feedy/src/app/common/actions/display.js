@@ -1,19 +1,18 @@
-export const TOAST = 'toast';
+import bind from 'helpers/bindActionToStore';
 
-/**
- * @param  {Object} opts toast message options
- * @param  {string} opts.type 'success', 'error', 'warning'
- */
-export function toast(opts) {
-  return {
-    type: TOAST,
-    payload: opts,
-  };
+export const MASK_ON = 'mask_on';
+export const MASK_OFF = 'mask_off';
+
+export function mask(message) {
+  return bind({
+    type: MASK_ON,
+    payload: message,
+  });
 }
 
-export function toastError(opts) {
-  return {
-    type: TOAST,
-    payload: {type: 'error', ...opts, },
-  };
+export function unmask() {
+  return bind({
+    type: MASK_OFF,
+    payload: null,
+  });
 }

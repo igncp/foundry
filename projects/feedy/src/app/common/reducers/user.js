@@ -2,17 +2,23 @@ import Immutable from 'immutable';
 
 import * as userActions from '../actions/user';
 
-export default function counter(state, action) {
+const initialState = Immutable.fromJS({
+  type: 'anonymous',
+});
+
+export default function counter(state = initialState, action) {
+  const getUserWithType = ()=> action.payload ? action.payload.set('type', 'auth') : state.set('type', 'anonymous');
+
   switch (action.type) {
-    case userActions.LOGIN_USER:
-      return action.payload;
+    case userActions.LOGOUT:
+      return initialState;
+    case userActions.LOGIN:
+      return getUserWithType();
     case userActions.SIGNUP_START:
       return state.set('type', 'pending');
     case userActions.SIGNUP_END:
-      return action.payload || state.set('type', 'anonymous');
+      return getUserWithType();
     default:
-      return Immutable.fromJS({
-        type: 'anonymous',
-      });
+      return state;
   }
 }

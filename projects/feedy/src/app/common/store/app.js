@@ -5,6 +5,7 @@ let store;
 
 export const create = () => {
   store = Redux.createStore(rootReducer);
+  return store;
 };
 
 export const get = ()=> store;

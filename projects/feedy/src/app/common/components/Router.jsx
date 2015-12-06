@@ -1,11 +1,7 @@
-import { createHashHistory, } from 'history';
 import { Router, } from 'react-router';
+
 import createRoute from 'helpers/createRoute';
-
-const history = createHashHistory({
-  queryKey: false,
-});
-
+import history from 'helpers/history';
 
 const AppRouter = ()=> {
   return (
@@ -13,6 +9,7 @@ const AppRouter = ()=> {
     {createRoute('/', 'index/Index')}
     {createRoute('/signup', 'auth/signup/Signup')}
     {createRoute('/remember-password', 'auth/remember-password/RememberPassword')}
+    {createRoute('/log-out', 'auth/logout/Logout')}
   </Router>);
 };
 AppRouter.displayName = 'AppRouter';

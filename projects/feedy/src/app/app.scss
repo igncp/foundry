@@ -1,0 +1,25 @@
+@import 'style/colors';
+
+a {
+  color: $link-color;
+  transition: color 0.5s ease;
+  &:focus {
+    color: $link-color;
+  }
+  &:hover {
+    color: $link-color-dark;
+  }
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+  margin: 0;
+  padding-top: 20px;
+}
+
+#main {
+  // min-height: 100%;
+}

@@ -1,12 +1,12 @@
 /**
- * Simple mock to simulate a backend server, using local storage and
- * a random (low) latency.
+ * Simple mock to simulate a backend server, using local storage 
+ * and for the database and a random latency.
  */
 
-import { getRandomInt, } from './helpers/math';
+import getRandomInt from './helpers/getRandomInt';
 import routes from './api/routes';
 
-const latencyMilisecondsInterval = [100, 800,];
+const latencyMilisecondsInterval = [100, 1200,];
 
 const createRequestDispatcher = (method)=> {
   return (url, params)=> {

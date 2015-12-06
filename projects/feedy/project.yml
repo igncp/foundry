@@ -6,6 +6,7 @@ only:
 technologies:
   - react
   - react-router
+  - ramda
   - es6
   - redux
   - immutable

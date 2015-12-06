@@ -1,35 +1,36 @@
+import React from 'react';
+import { connect, } from 'react-redux';
+
 import AppComponent from 'components/AppComponent';
 import Router from 'components/Router';
-import Toaster from 'components/Toaster';
-
-import React from 'react';
+import Mask from 'components/mask/Mask';
 
 import * as appStoreModule from 'store/app';
+
+require('toastr/build/toastr.min.css');
+require('./app.scss');
 
 appStoreModule.create();
 
 class App extends AppComponent {
-  componentDidMount() {
-    this.unsubscribeFromAppStore = appStoreModule.get().subscribe(()=> {
-      const appState = appStoreModule.getState();
-
-      this.setData({
-        display: appState.display,
-      });
-    });
-  }
-  componentWillUnmount() {
-    this.unsubscribeFromAppStore();
-  }
   render() {
-    const data = this.state.data;
-    const display = data.get('display');
+    const storeState = appStoreModule.getState();
+    const display = storeState.display;
 
     return (<div>
-      <Toaster messages={display && display.get('toastMessages')}/>
+      <Mask isVisible={display.get('isMaskVisible')} message={display.get('maskMessage')}/>
       <Router/>
     </div>);
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    appState: state,
+  };
+}
+
+
+export default connect(
+  mapStateToProps
+)(App);

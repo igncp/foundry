@@ -1,10 +1,19 @@
 import server from 'server/entry';
-import { toastError, } from 'actions/display';
+import toastr from 'toastr/toastr';
 
-export const signupUser = (user)=> {
-  return server.post('user', user)
-    .then(res => res.data)
-    .catch(res => toastError({
-      message: res.error,
-    }));
+const defaultCall = (callType, query, params)=> {
+  return server[callType](query, params)
+    .then(res=> res.data)
+    .catch(res=> {
+      toastr.error(res.error);
+    });
 };
+
+export const signupUser = user=> defaultCall('post', 'user', user);
+
+export const getUserByOnlyUsername = username=> defaultCall('get', 'user', {
+    username: username,
+    onlyUsername: true,
+  });
+
+export const getUserByCredentials = credentials=> defaultCall('get', 'user', credentials);

@@ -11,7 +11,7 @@ class Index extends React.Component {
     const appState = appStoreModule.getState();
 
     return (<MainLayout>
-      {appState.user.get('type') === 'authenticated' ? 
+      {appState.user.get('type') === 'auth' ? 
         <Authenticated/> :
         <Anonymous/>}
     </MainLayout>);

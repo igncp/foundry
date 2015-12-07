@@ -1,5 +1,5 @@
 import { fromJS, } from 'immutable';
-import db from 'server/helpers/database';
+import ls from 'server/helpers/localStorage';
 
 const error = message => {
   throw new Error(message);
@@ -8,7 +8,7 @@ const error = message => {
 export default (initialRoutes)=> {
   let newRoutes = initialRoutes.mergeIn(['get',], {
     user: (params)=> {
-      const savedUsers = db.query(['users', ]);
+      const savedUsers = ls.query(['users', ]);
       let matchingUsers;
 
       if (!savedUsers) error('There are no users created');
@@ -27,14 +27,17 @@ export default (initialRoutes)=> {
 
       return matchingUsers.first();
     },
+    'user/last': ()=> {
+      return ls.query(['lastUser',]);
+    },
   }).mergeIn(['post',], {
     user: (params)=> {
-      const savedUsers = db.query(['users', ]);
+      const savedUsers = ls.query(['users', ]);
       const user = fromJS({
         ...params.toJS(),
         type: 'auth',
       });
-      
+
       if (savedUsers) {
         savedUsers.forEach((savedUser)=> {
           if (savedUser.get('username') === user.get('username')) {
@@ -42,12 +45,15 @@ export default (initialRoutes)=> {
           }
         });
       }
-      
+
       const newSavedUsers = (savedUsers) ? savedUsers.push(params) : fromJS([params,]);
 
-      db.persist(['users',], newSavedUsers);
+      ls.persist(['users',], newSavedUsers);
 
       return user;
+    },
+    'user/last': (username)=> {
+      ls.persist(['lastUser',], username);
     },
   });
 

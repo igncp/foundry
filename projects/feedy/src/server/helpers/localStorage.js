@@ -1,9 +1,3 @@
-/**
- * Despite the behaviour of a database should be asynchronous,
- * the server mock api is already asynchronous so it is kept synchronous
- * for simplicity
- */
-
 import Immutable from 'immutable';
 
 const keyPrefix = '@foundryFeedy';
@@ -27,7 +21,7 @@ export const persist = (keysArr, value)=> {
   const finalValue = Immutable.Iterable.isIterable(value) ?
     value.toJS() : value;
 
-  return window.localStorage.setItem(keysStr, JSON.stringify(finalValue));
+  return window.localStorage.setItem(keysStr, (value !== null) ? JSON.stringify(finalValue) : '');
 };
 
 export const purge = ()=> {

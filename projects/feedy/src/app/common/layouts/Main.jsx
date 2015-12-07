@@ -6,15 +6,15 @@ import AppComponent from 'components/AppComponent';
 import AuthNav from './partials/AuthNav';
 import AnonymousNav from './partials/AnonymousNav';
 
-import purgeDatabase from 'helpers/purgeDatabase';
+import purgePersistedData from 'helpers/purgePersistedData';
 import history from 'helpers/history';
 
 import * as appStoreModule from 'store/app';
 
 class MainLayout extends AppComponent {
-  purgeDatabase(e) {
+  purgePersistedData(e) {
     e.preventDefault();
-    purgeDatabase();
+    purgePersistedData();
     toastr.info('Database purged');
     history.replaceState(null, '/');
   }
@@ -22,7 +22,7 @@ class MainLayout extends AppComponent {
     const appState = appStoreModule.getState();
 
     return (<div className="col-sm-10 col-sm-offset-1">
-      <h1><Link to="/">Feedy</Link> <small>under construction</small></h1>
+      <h1 style={styles.title}><Link to="/">Feedy</Link> <small>under construction</small></h1>
       {appState.user.get('type') === 'auth' ?
         <AuthNav/> :
         <AnonymousNav/>
@@ -31,7 +31,7 @@ class MainLayout extends AppComponent {
       <footer style={styles.footer}>
         <p>This application uses the <a href="https://developer.mozilla.org/en/docs/Web/API/Window/localStorage">localStorage API</a>.
           This means that the data you enter will only be available on your browser.
-          To purge the stored Feedy values, <a href="" onClick={e => this.purgeDatabase(e)}>click here</a>.</p>
+          To purge the stored Feedy values, <a href="" onClick={e => this.purgePersistedData(e)}>click here</a>.</p>
       </footer>
     </div>);
   }
@@ -44,5 +44,8 @@ const styles = {
   footer: {
     marginTop: 50,
     textAlign: 'center',
+  },
+  title: {
+    paddingTop: 20,
   },
 };

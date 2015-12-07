@@ -1,41 +1,12 @@
 /**
- * Simple mock to simulate a backend server, using local storage 
- * and for the database and a random latency.
+ * Simple mock to simulate a backend server, using local storage
+ * and for the database and a random latency for ajax calls (get, post, put) and
+ * no latency for mocked cookies.
  */
 
-import getRandomInt from './helpers/getRandomInt';
-import routes from './api/routes';
+import {get, post, put, } from './helpers/ajax';
+import cookies from './helpers/cookies';
 
-const latencyMilisecondsInterval = [100, 1200,];
-
-const createRequestDispatcher = (method)=> {
-  return (url, params)=> {
-    const latency = getRandomInt(...latencyMilisecondsInterval);
-
-    return new Promise((resolve, reject)=> {
-      setTimeout(()=> {
-        try {
-          const result = routes.getIn([method, url,])(params);
-
-          resolve({
-            data: result,
-            error: false,
-          });
-        } catch (e) {
-          console.warn('feedy server error -> ', e);
-          reject({
-            error: e,
-          });
-        }
-      }, latency);
-    });
-  };
-};
-
-const server = {};
-
-server.get = createRequestDispatcher('get');
-server.post = createRequestDispatcher('post');
-server.put = createRequestDispatcher('put');
+const server = {get, post, put, cookies, };
 
 export default server;

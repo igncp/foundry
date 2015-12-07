@@ -1,15 +1,15 @@
 import { Router, } from 'react-router';
 
-import createRoute from 'helpers/createRoute';
 import history from 'helpers/history';
+import createRoute from 'helpers/router/createRoute';
 
 const AppRouter = ()=> {
   return (
   <Router history={history}>
-    {createRoute('/', 'index/Index')}
-    {createRoute('/signup', 'auth/signup/Signup')}
-    {createRoute('/remember-password', 'auth/remember-password/RememberPassword')}
-    {createRoute('/log-out', 'auth/logout/Logout')}
+    {createRoute('/', 'index/Index', [])}
+    {createRoute('/signup', 'auth/signup/Signup', ['onlyAnonym',])}
+    {createRoute('/remember-password', 'auth/remember-password/RememberPassword', ['onlyAnonym',])}
+    {createRoute('/log-out', 'auth/logout/Logout', ['onlyAuth',])}
   </Router>);
 };
 AppRouter.displayName = 'AppRouter';

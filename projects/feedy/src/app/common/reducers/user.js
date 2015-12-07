@@ -6,7 +6,7 @@ const initialState = Immutable.fromJS({
   type: 'anonymous',
 });
 
-export default function counter(state = initialState, action) {
+export default (state = initialState, action)=> {
   const getUserWithType = ()=> action.payload ? action.payload.set('type', 'auth') : state.set('type', 'anonymous');
 
   switch (action.type) {

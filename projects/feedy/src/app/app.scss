@@ -3,6 +3,7 @@
 a {
   color: $link-color;
   transition: color 0.5s ease;
+  text-shadow: 1px 1px 1px #ddd;
   &:focus {
     color: $link-color;
   }

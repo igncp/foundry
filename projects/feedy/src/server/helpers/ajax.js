@@ -1,16 +1,16 @@
 import getRandomInt from './getRandomInt';
 import routes from '../api/routes';
 
-const latencyMilisecondsInterval = [100, 1200,];
+const latencyMilisecondsInterval = [100, 1200];
 
-const createRequestDispatcher = (method)=> {
-  return (url, params)=> {
+const createRequestDispatcher = (method) => {
+  return (url, params) => {
     const latency = getRandomInt(...latencyMilisecondsInterval);
 
-    return new Promise((resolve, reject)=> {
-      setTimeout(()=> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
         try {
-          const result = routes.getIn([method, url,])(params);
+          const result = routes.getIn([method, url])(params);
 
           resolve({
             data: result,

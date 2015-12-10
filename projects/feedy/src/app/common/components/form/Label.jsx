@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Label = (props)=> {
+const Label = (props) => {
   return (<label htmlFor={props.forId} style={styles.label}>{props.text}</label>);
 };
 

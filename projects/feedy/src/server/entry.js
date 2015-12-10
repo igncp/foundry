@@ -4,9 +4,14 @@
  * no latency for mocked cookies.
  */
 
-import {get, post, put, } from './helpers/ajax';
+import { get, post, put } from './helpers/ajax';
 import cookies from './helpers/cookies';
 
-const server = {get, post, put, cookies, };
+const server = {
+  get,
+  post,
+  put,
+  cookies,
+};
 
 export default server;

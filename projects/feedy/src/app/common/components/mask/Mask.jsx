@@ -2,10 +2,10 @@ import React from 'react';
 
 require('./Mask.scss');
 
-const Mask =(props)=>  {
+const Mask =(props) =>  {
   const compStyle = styles.comp;
   return (
-    <div style={{...compStyle, ...(props.isVisible ? styles.visibleComp : styles.hiddenComp),}}>
+    <div style={{ ...compStyle, ...(props.isVisible ? styles.visibleComp : styles.hiddenComp) }}>
       <div style={styles.text}>{props.message}<br/><div className="three-quarters-loader"/></div>
     </div>
   );

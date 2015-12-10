@@ -9,17 +9,17 @@ const initialState = Immutable.fromJS({
 
 export default function counter(state = initialState, action) {
   switch (action.type) {
-    case displayActions.MASK_ON:
-      return state.merge({
-        isMaskVisible: true,
-        maskMessage: action.payload,
-      });
-    case displayActions.MASK_OFF:
-      return state.merge({
-        isMaskVisible: false,
-        maskMessage: null,
-      });
-    default:
-      return state;
+  case displayActions.MASK_ON:
+    return state.merge({
+      isMaskVisible: true,
+      maskMessage: action.payload,
+    });
+  case displayActions.MASK_OFF:
+    return state.merge({
+      isMaskVisible: false,
+      maskMessage: null,
+    });
+  default:
+    return state;
   }
 }

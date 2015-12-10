@@ -11,7 +11,7 @@ const getInputProps = props => R.omit(R.keys(TextishInput.propTypes), props);
 class TextishInput extends AppComponent {
   render() {
     const inputProps = getInputProps(this.props);
-    this.compId = this.props.id || this.compId || 'textish-input-' + getGUId();
+    this.compId = this.props.id || this.compId || `textish-input-${getGUId()}`;
 
     return (
       <div style={styles.comp}>

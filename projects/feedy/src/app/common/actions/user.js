@@ -1,5 +1,6 @@
 /**
- * There are two patterns. One to set the user type to pending when signup with two actions (start and end),
+ * There are two patterns. One to set the user type to pending when signup
+ * with two actions (start and end),
  * and manage this state externally for the login so there is only one action
  */
 
@@ -13,7 +14,7 @@ export const SIGNUP_START = 'start_signup';
 export const SIGNUP_END = 'end_signup';
 
 export function login(user) {
-  server.cookies.set('lastUsername', user.get('username'))
+  server.cookies.set('lastUsername', user.get('username'));
 
   return bind({
     type: LOGIN,
@@ -22,7 +23,7 @@ export function login(user) {
 }
 
 export function logout() {
-  server.cookies.set('lastUsername', null)
+  server.cookies.set('lastUsername', null);
 
   return bind({
     type: LOGOUT,
@@ -38,7 +39,7 @@ export function signupStart(user) {
 }
 
 export function signupEnd(user) {
-  server.cookies.set('lastUsername', user.get('username'))
+  server.cookies.set('lastUsername', user.get('username'));
 
   return bind({
     type: SIGNUP_END,

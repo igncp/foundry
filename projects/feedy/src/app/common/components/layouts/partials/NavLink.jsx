@@ -1,14 +1,14 @@
-import {PropTypes, } from 'react';
-import { Link, } from 'react-router';
+import { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 import history from 'helpers/history';
 
-const NavLink = (props)=> {
+const NavLink = (props) => {
   const pathname = history.getPathname();
   return (
-  <Link className={"btn btn-default" + (pathname === props.to ? ' active' : '')}
+  <Link className={`btn btn-default ${(pathname === props.to ? ' active' : '')}`}
     style={styles.link} to={props.to}
-  >{props.text}</Link>)
+  >{props.text}</Link>);
 };
 
 NavLink.propTypes = {

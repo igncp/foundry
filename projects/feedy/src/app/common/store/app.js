@@ -8,6 +8,6 @@ export const create = () => {
   return store;
 };
 
-export const get = ()=> store;
+export const get = () => store;
 
-export const getState = ()=> store.getState();
+export const getState = () => store.getState();

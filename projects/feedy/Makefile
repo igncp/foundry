@@ -9,3 +9,6 @@ server:
 
 test-watch:
 	./node_modules/.bin/mocha --require babel-core/register mocha-globals.js "src/**/*-test.js" -w
+
+lint:
+	./node_modules/.bin/eslint -c .eslintrc src/  --ext .js,.jsx

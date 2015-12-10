@@ -19,6 +19,8 @@
     "chai": "^3.4.1",
     "compass-mixins": "^0.12.7",
     "css-loader": "^0.22.0",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.11.3",
     "http-server": "^0.8.5",
     "immutable": "^3.7.5",
     "jquery": "^2.1.4",

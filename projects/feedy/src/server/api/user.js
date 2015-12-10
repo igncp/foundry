@@ -1,59 +1,75 @@
-import { fromJS, } from 'immutable';
+import { fromJS } from 'immutable';
 import ls from 'server/helpers/localStorage';
 
 const error = message => {
   throw new Error(message);
 };
 
-export default (initialRoutes)=> {
-  let newRoutes = initialRoutes.mergeIn(['get',], {
-    user: (params)=> {
-      const savedUsers = ls.query(['users', ]);
-      let matchingUsers;
+const errorIfUserExists = (savedUsers, userPlainObj) => {
+  savedUsers.forEach((savedUser) => {
+    if (savedUser.get('username') === userPlainObj.get('username')) {
+      error('The user already exists');
+    }
+  });
+};
 
-      if (!savedUsers) error('There are no users created');
+const signupUser = (savedUsers, userPlainObj, userParams) => {
+  if (savedUsers) errorIfUserExists(savedUsers, userPlainObj);
 
-      if (params.byId) {
+  const newSavedUsers = (savedUsers) ? savedUsers.push(userParams) : fromJS([userParams]);
 
-      } else {
-        matchingUsers = savedUsers.filter((savedUser)=> savedUser.get('username') === params.username);
-        // remember password case
-        if (!params.onlyUsername) {
-          matchingUsers = matchingUsers.filter((user)=> user.get('password') === params.password);
-        }
-      }
+  ls.persist(['users'], newSavedUsers);
+};
 
-      if (matchingUsers.size === 0) error('No matches');
+const filterUsers = (userParams, savedUsers) => {
+  let filteredUsers;
+  if (!userParams.byId) {
+    filteredUsers = savedUsers.filter((savedUser) => savedUser
+      .get('username') === userParams.username);
+    // remember password case
+    if (!userParams.onlyUsername) {
+      filteredUsers = filteredUsers
+        .filter((user) => user.get('password') === userParams.password);
+    }
+  }
+  return filteredUsers;
+};
+
+const getMatchingUsers = (userParams, savedUsers) => {
+  if (!savedUsers) error('There are no users created');
+
+  const matchingUsers = filterUsers(userParams, savedUsers);
+
+  if (matchingUsers.size === 0) error('No matches');
+
+  return matchingUsers;
+};
+
+export default (initialRoutes) => {
+  const newRoutes = initialRoutes.mergeIn(['get'], {
+    user: (userParams) => {
+      const savedUsers = ls.query(['users']);
+      const matchingUsers = getMatchingUsers(userParams, savedUsers);
 
       return matchingUsers.first();
     },
-    'user/last': ()=> {
-      return ls.query(['lastUser',]);
+    'user/last': () => {
+      return ls.query(['lastUser']);
     },
-  }).mergeIn(['post',], {
-    user: (params)=> {
-      const savedUsers = ls.query(['users', ]);
-      const user = fromJS({
-        ...params.toJS(),
+  }).mergeIn(['post'], {
+    user: (userParams) => {
+      const savedUsers = ls.query(['users']);
+      const userPlainObj = fromJS({
+        ...userParams.toJS(),
         type: 'auth',
       });
 
-      if (savedUsers) {
-        savedUsers.forEach((savedUser)=> {
-          if (savedUser.get('username') === user.get('username')) {
-            error('The user already exists');
-          }
-        });
-      }
+      signupUser(savedUsers, userPlainObj, userParams);
 
-      const newSavedUsers = (savedUsers) ? savedUsers.push(params) : fromJS([params,]);
-
-      ls.persist(['users',], newSavedUsers);
-
-      return user;
+      return userPlainObj;
     },
-    'user/last': (username)=> {
-      ls.persist(['lastUser',], username);
+    'user/last': (username) => {
+      ls.persist(['lastUser'], username);
     },
   });
 

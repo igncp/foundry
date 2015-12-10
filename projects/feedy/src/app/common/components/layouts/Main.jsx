@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, } from 'react-router';
+import { Link } from 'react-router';
 import toastr from 'toastr/toastr';
 
 import AppComponent from 'components/AppComponent';
@@ -29,9 +29,13 @@ class MainLayout extends AppComponent {
       }
       {this.props.children}
       <footer style={styles.footer}>
-        <p>This application uses the <a href="https://developer.mozilla.org/en/docs/Web/API/Window/localStorage">localStorage API</a>.
+        <p>This application uses the
+         <a href="https://developer.mozilla.org/en/docs/Web/API/Window/localStorage">
+          {' localStorage API'}
+        </a>.
           This means that the data you enter will only be available on your browser.
-          To purge the stored Feedy values, <a href="" onClick={e => this.purgePersistedData(e)}>click here</a>.</p>
+          To purge the stored Feedy values,
+           <a href="" onClick={e => this.purgePersistedData(e)}> click here</a>.</p>
       </footer>
     </div>);
   }

@@ -1,15 +1,15 @@
 import Immutable from  'immutable';
 import R from 'ramda';
 
-import MainLayout from 'layouts/Main';
+import MainLayout from 'components/layouts/Main';
 import AppComponent from 'components/AppComponent';
 import TextishInput from 'components/form/TextishInput';
 
-import { signupUser, } from 'helpers/user';
-import getEmptyStrPropsObj from 'pure/getEmptyStrPropsObj';
+import { signupUser } from 'helpers/user';
+import getEmptyStrPropsObj from 'helpers/pure/getEmptyStrPropsObj';
 import * as appStoreModule from 'store/app';
 
-const textInputs = ['username', 'password', 'passwordC', ];
+const textInputs = ['username', 'password', 'passwordC'];
 const emptyInputsObj = getEmptyStrPropsObj(textInputs);
 
 class Signup extends AppComponent {
@@ -22,7 +22,7 @@ class Signup extends AppComponent {
     };
   }
   componentDidMount() {
-    this.unsubscribeFromAppStore = appStoreModule.get().subscribe(()=> {
+    this.unsubscribeFromAppStore = appStoreModule.get().subscribe(() => {
       const appState = appStoreModule.getState();
 
       this.setData({
@@ -60,14 +60,14 @@ class Signup extends AppComponent {
       <div>
         <div>
           <TextishInput
-            onChange={event=> this.setData(data.set('username', event.target.value))}
+            onChange={event => this.setData(data.set('username', event.target.value))}
             text="Username"
             value={data.get('username')}
           />
         </div>
         <div>
           <TextishInput
-            onChange={event=> this.setData(data.set('password', event.target.value))}
+            onChange={event => this.setData(data.set('password', event.target.value))}
             text="Password"
             type="password"
             value={data.get('password')}
@@ -75,7 +75,7 @@ class Signup extends AppComponent {
         </div>
         <div>
           <TextishInput
-            onChange={event=> this.setData(data.set('passwordC', event.target.value))}
+            onChange={event => this.setData(data.set('passwordC', event.target.value))}
             text="Password Confirmation"
             type="password"
             value={data.get('passwordC')}
@@ -87,9 +87,9 @@ class Signup extends AppComponent {
         <p>
           {user.get('type') !== 'pending' ?
             <input
-              className='btn btn-default'
+              className="btn btn-default"
               disabled={!this.isFormValid()}
-              onClick={()=> this.handleButtonClick()}
+              onClick={() => this.handleButtonClick()}
               type="button"
               value="Enter"
             /> : user.get('type') === 'pending' ?

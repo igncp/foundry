@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link, } from 'react-router';
+import { Link } from 'react-router';
 import toastr from 'toastr/toastr';
 
 import AppComponent from 'components/AppComponent';
 import TextishInput from 'components/form/TextishInput';
 
-import {getUserByCredentials, } from 'api/user';
-import {login, } from 'actions/user';
-import {mask, unmask, } from 'actions/display';
+import { getUserByCredentials } from 'helpers/api/user';
+import { login } from 'actions/user';
+import { mask, unmask } from 'actions/display';
 
 class Anonymous extends AppComponent {
   login() {
@@ -16,9 +16,10 @@ class Anonymous extends AppComponent {
     getUserByCredentials({
       username: data.get('username'),
       password: data.get('password'),
-    }).then((user)=> {
+    }).then((user) => {
       unmask();
       if (user) {
+        toastr.clear();
         toastr.info('Login successful');
         login(user);
       }
@@ -32,20 +33,27 @@ class Anonymous extends AppComponent {
       <div>
         <div>
           <TextishInput
-            onChange={event=> this.setData(data.set('username', event.target.value))}
+            onChange={event => this.setData(data.set('username', event.target.value))}
             text="Username"
             value={data.get('username')}
           />
         </div>
         <div>
           <TextishInput
-            onChange={event=> this.setData(data.set('password', event.target.value))}
+            onChange={event => this.setData(data.set('password', event.target.value))}
             text="Password"
             type="password"
             value={data.get('password')}
           />
         </div>
-        <p><input className="btn btn-default" onClick={()=> this.login()} type="button" value="Enter"/></p>
+        <p>
+          <input
+            className="btn btn-default"
+            onClick={() => this.login()}
+            type="button"
+            value="Enter"
+          />
+        </p>
       </div>
       <p><Link to="signup">Sign up</Link></p>
       <p><Link to="remember-password">Remember password</Link></p>

@@ -1,9 +1,9 @@
 import toastr from 'toastr/toastr';
 
 import AppComponent from 'components/AppComponent';
-import MainLayout from 'layouts/Main';
+import MainLayout from 'components/layouts/Main';
 
-import {logout, } from 'actions/user';
+import { logout } from 'actions/user';
 import history from 'helpers/history';
 
 class Logout extends AppComponent {
@@ -11,7 +11,7 @@ class Logout extends AppComponent {
     logout();
     toastr.clear();
     toastr.info('Logout successful');
-    history.replaceState(null, '/')
+    history.replaceState(null, '/');
   }
   render() {
     return (<MainLayout />);

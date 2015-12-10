@@ -1,11 +1,11 @@
-import { createHashHistory, } from 'history';
+import { createHashHistory } from 'history';
 import R from 'ramda';
 
 const history = createHashHistory({
   queryKey: false,
 });
 
-const getPathnameFromHref = R.memoize((href)=> {
+const getPathnameFromHref = R.memoize((href) => {
   const startPlace = href.indexOf('#') + 1;
   const pathname = href.substr(startPlace, href.length - startPlace);
   return pathname;
@@ -16,7 +16,7 @@ const getPathnameFromHref = R.memoize((href)=> {
  * listening to transitions, but that doesn't get the first path. This only works
  * with createHashHistory
  */
-history.getPathname = ()=> {
+history.getPathname = () => {
   const href = window.location.href;
   return getPathnameFromHref(href);
 };

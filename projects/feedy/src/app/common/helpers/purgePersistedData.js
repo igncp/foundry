@@ -1,6 +1,6 @@
-import { purge, } from 'server/helpers/localStorage';
+import { purge } from 'server/helpers/localStorage';
 
-export default (event)=> {
+export default (event) => {
   if (event) event.preventDefault();
   purge();
 };

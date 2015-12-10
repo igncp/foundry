@@ -1,6 +1,6 @@
-import {PropTypes, } from 'react';
+import { PropTypes } from 'react';
 
-const Nav = (props)=> {
+const Nav = (props) => {
   return (<nav style={styles.comp}>{props.children}</nav>);
 };
 

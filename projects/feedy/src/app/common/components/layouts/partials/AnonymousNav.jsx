@@ -1,7 +1,7 @@
 import Nav from './Nav';
 import NavLink from './NavLink';
 
-const AnonymousNav = (props)=> {
+const AnonymousNav = () => {
   return (<Nav>
     <NavLink text="Home" to="/"/>
     <NavLink text="Sign Up" to="/signup"/>

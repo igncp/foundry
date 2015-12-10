@@ -1,14 +1,14 @@
 import React from 'react';
-import { connect, } from 'react-redux';
+import { connect } from 'react-redux';
 
 import AppComponent from 'components/AppComponent';
 import Router from 'components/Router';
 import Mask from 'components/mask/Mask';
 
 import server from 'server/entry';
-import {getUserByOnlyUsername, } from 'api/user';
-import {login, } from 'actions/user';
-import {mask, unmask, } from 'actions/display';
+import { getUserByOnlyUsername } from 'helpers/api/user';
+import { login } from 'actions/user';
+import { mask, unmask } from 'actions/display';
 import * as appStoreModule from 'store/app';
 
 require('toastr/build/toastr.min.css');
@@ -24,22 +24,23 @@ class App extends AppComponent {
 
     if (cookiesUsername) {
       mask('Loading user data...');
-      getUserByOnlyUsername(cookiesUsername).then((user)=> {
+      getUserByOnlyUsername(cookiesUsername).then((user) => {
         login(user);
         unmask();
         this.setData({
           hasBootstraped: true,
-        })
-      }).catch(()=> {
+        });
+      }).catch((error) => {
+        console.log("error", error);
         unmask();
         this.setData({
           hasBootstraped: true,
-        })
+        });
       });
     } else {
       this.setDataBeforeMount({
         hasBootstraped: true,
-      })
+      });
     }
   }
   getDefaultData() {

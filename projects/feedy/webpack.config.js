@@ -36,7 +36,6 @@ module.exports = {
   resolve: {
     root: __dirname,
     modulesDirectories: [
-      '.',
       './src',
       'node_modules',
       'common', // common for itself and children in any depth

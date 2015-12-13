@@ -1,5 +1,5 @@
-import getRandomInt from './getRandomInt';
-import routes from '../api/routes';
+import getRandomInt from 'helpers/getRandomInt';
+import routes from 'api/routes';
 
 const latencyMilisecondsInterval = [100, 1200];
 

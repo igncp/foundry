@@ -17,6 +17,8 @@ if (isWatching) {
   plugins.push(new LiveReloadPlugin());
 } else {
   devtool = 'eval';
+  plugins.push(new webpack.optimize.OccurenceOrderPlugin());
+  plugins.push(new webpack.optimize.DedupePlugin());
   plugins.push(new webpack.optimize.UglifyJsPlugin({
     minimize: true,
     compress: {
@@ -26,7 +28,7 @@ if (isWatching) {
 }
 
 module.exports = {
-  entry: ['./src/main.jsx',],
+  entry: ['./src/main.jsx'],
   output: {
     path: PATHS.dist,
     filename: 'main.js',
@@ -34,11 +36,12 @@ module.exports = {
   resolve: {
     root: __dirname,
     modulesDirectories: [
+      '.',
       './src',
       'node_modules',
       'common', // common for itself and children in any depth
     ],
-    extensions: ['', '.js', '.json', '.jsx',],
+    extensions: ['', '.js', '.json', '.jsx'],
   },
   noInfo: true,
   devtool: devtool,
@@ -49,16 +52,19 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       loader: 'babel',
       query: {
-        presets: ['es2015', 'stage-0', 'react',],
-        plugins: ['transform-decorators-legacy',],
+        presets: ['es2015', 'stage-0', 'react'],
+        plugins: ['transform-decorators-legacy'],
       },
     }, {
+      test: /\.json$/,
+      loaders: ["json"],
+    }, {
       test: /\.css$/,
-      loaders: ["style", "css",],
+      loaders: ["style", "css"],
     }, {
       test: /\.scss$/,
-      loaders: ["style", "css", "sass",],
-    },],
+      loaders: ["style", "css", "sass"],
+    }],
   },
   plugins: plugins,
   sassLoader: {

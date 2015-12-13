@@ -1,9 +1,10 @@
 import Immutable from  'immutable';
 import R from 'ramda';
 
-import MainLayout from 'components/layouts/Main';
 import AppComponent from 'components/AppComponent';
+import MainLayout from 'components/layouts/Main';
 import TextishInput from 'components/form/TextishInput';
+import Box from 'components/Box';
 
 import { signupUser } from 'helpers/user';
 import getEmptyStrPropsObj from 'helpers/pure/getEmptyStrPropsObj';
@@ -57,7 +58,7 @@ class Signup extends AppComponent {
 
     return (<MainLayout>
       <h2>Signup</h2>
-      <div>
+      <Box>
         <div>
           <TextishInput
             onChange={event => this.setData(data.set('username', event.target.value))}
@@ -95,7 +96,7 @@ class Signup extends AppComponent {
             /> : user.get('type') === 'pending' ?
             <span>Pending...</span> : null}
         </p>
-      </div>
+      </Box>
     </MainLayout>);
   }
 }

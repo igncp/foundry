@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
 
 import composeWithUserApi from './user';
+import composeWithMessageApi from './message';
 
 let routes = fromJS({
   put: {},
@@ -9,5 +10,6 @@ let routes = fromJS({
 });
 
 routes = composeWithUserApi(routes);
+routes = composeWithMessageApi(routes);
 
 export default routes;

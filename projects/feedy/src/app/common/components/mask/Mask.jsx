@@ -1,4 +1,4 @@
-import React from 'react';
+import { PropTypes } from 'react';
 
 require('./Mask.scss');
 
@@ -12,8 +12,8 @@ const Mask =(props) =>  {
 };
 
 Mask.propTypes = {
-  isVisible: React.PropTypes.bool,
-  message: React.PropTypes.string,
+  isVisible: PropTypes.bool,
+  message: PropTypes.string,
 };
 
 export default Mask;

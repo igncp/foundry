@@ -1,40 +1,23 @@
-import React from 'react';
-import R from 'ramda';
+import { PropTypes } from 'react';
 
 import AppComponent from 'components/AppComponent';
-import Label from 'components/form/Label';
+import inputWithLabel from 'components/form/inputWithLabel';
 
-import getGUId from 'helpers/getGUId';
+import getRestProps from 'helpers/pure/getRestProps';
 
-const getInputProps = props => R.omit(R.keys(TextishInput.propTypes), props);
 
 class TextishInput extends AppComponent {
   render() {
-    const inputProps = getInputProps(this.props);
-    this.compId = this.props.id || this.compId || `textish-input-${getGUId()}`;
-
     return (
-      <div style={styles.comp}>
-        <Label forId={this.compId} text={this.props.text}/><br/>
-        <input
-          id={this.compId}
-          placeholder={this.props.text}
-          {...inputProps}
-        />
-      </div>
-    );
+    <input
+      style={this.props.parentStyle}
+      {...getRestProps(this)}
+    />);
   }
 }
 
 TextishInput.propTypes = {
-  id: React.PropTypes.string,
-  text: React.PropTypes.string,
+  parentStyle: PropTypes.object,
 };
 
-export default TextishInput;
-
-const styles = {
-  comp: {
-    marginBottom: 10,
-  },
-};
+export default inputWithLabel(TextishInput);

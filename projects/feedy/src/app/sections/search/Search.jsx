@@ -1,8 +1,8 @@
-import React from 'react';
+import { Component } from 'react';
 
 import MainLayout from 'components/layouts/Main';
 
-class Search extends React.Component {
+class Search extends Component {
   render() {
     return (<MainLayout>
       Search

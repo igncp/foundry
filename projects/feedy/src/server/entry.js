@@ -1,16 +1,20 @@
 /**
- * Simple mock to simulate a backend server, using local storage
- * and for the database and a random latency for ajax calls (get, post, put) and
+ * Simple mock to simulate a backend server, using local storage,
+ * a random latency for ajax calls (get, post, put) and
  * no latency for mocked cookies.
+ * The checkVersion function allows to purge data if it was from
+ * a previous significant version (first or sercond number).
  */
 
-import { get, post, put } from './helpers/ajax';
-import cookies from './helpers/cookies';
+import { get, post, put } from './ajax';
+import cookies from './cookies';
+import getDataSavedVersion from './getDataSavedVersion';
 
 const server = {
   get,
   post,
   put,
+  getDataSavedVersion,
   cookies,
 };
 

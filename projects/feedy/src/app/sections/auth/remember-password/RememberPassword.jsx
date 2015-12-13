@@ -1,5 +1,6 @@
-import MainLayout from 'components/layouts/Main';
 import AppComponent from 'components/AppComponent';
+import Box from 'components/Box';
+import MainLayout from 'components/layouts/Main';
 import TextishInput from 'components/form/TextishInput';
 
 import { mask, unmask } from 'actions/display';
@@ -23,8 +24,8 @@ class RememberPassword extends AppComponent {
 
     return (<MainLayout>
       <h2>Remember password</h2>
-      <p>Enter your username: <small>(The password will be displayed directly!)</small></p>
-      <div>
+      <Box>
+        <p>Enter your username: <small>(The password will be displayed directly!)</small></p>
         <TextishInput
           onChange={event => this.setData({
             username: event.target.value,
@@ -42,7 +43,7 @@ class RememberPassword extends AppComponent {
         <input className="btn btn-info" disabled={!data.get('username')}
           onClick={() => this.rememberPassword()} type="button" value="Remember"
         />
-      </div>
+      </Box>
     </MainLayout>);
   }
 }

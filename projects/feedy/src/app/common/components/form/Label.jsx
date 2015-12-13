@@ -1,12 +1,12 @@
-import React from 'react';
+import { PropTypes } from 'react';
 
 const Label = (props) => {
   return (<label htmlFor={props.forId} style={styles.label}>{props.text}</label>);
 };
 
 Label.propTypes = {
-  forId: React.PropTypes.string,
-  text: React.PropTypes.string,
+  forId: PropTypes.string,
+  text: PropTypes.string,
 };
 
 export default Label;

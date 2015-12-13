@@ -1,4 +1,5 @@
-import React from 'react';
+import { Component } from 'react';
+import { any, compose, isEmpty } from 'ramda';
 import Immutable from 'immutable';
 
 /**
@@ -7,9 +8,9 @@ import Immutable from 'immutable';
  * React expects a plain object as the state, so it is wrapped in
  * the `data` property.
  *
- * this.data is created because this.setState is not synchronous (it uses batching)
+ * this._data is created because this.setState is not synchronous (it uses batching)
  */
-export default class AppComponent extends React.Component {
+export default class AppComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -43,5 +44,13 @@ export default class AppComponent extends React.Component {
   }
   getData() {
     return this._data;
+  }
+  dIOC(stateKey) { // defaultInputOnChange
+    return (e) => this.setData({ [stateKey]: e.target.value });
+  }
+  isAnyOfDataEmpty(inputs) {
+    return any(
+      compose(isEmpty, input => this.state.data.get(input))
+    )(inputs);
   }
 }

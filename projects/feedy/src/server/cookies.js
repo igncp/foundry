@@ -1,4 +1,4 @@
-import ls from './localStorage';
+import ls from 'helpers/localStorage';
 
 const getCookieKey = key => [`cookie/${key}`];
 

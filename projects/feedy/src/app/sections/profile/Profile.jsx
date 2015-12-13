@@ -1,8 +1,8 @@
-import React from 'react';
+import { Component } from 'react';
 
 import MainLayout from 'components/layouts/Main';
 
-class Profile extends React.Component {
+class Profile extends Component {
   render() {
     return (<MainLayout>
       Profile

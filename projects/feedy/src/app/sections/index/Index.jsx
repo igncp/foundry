@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import * as appStoreModule from 'store/app';
 
@@ -6,7 +6,7 @@ import Anonymous from './sections/anonymous/Anonymous';
 import Authenticated from './sections/authenticated/Authenticated';
 import MainLayout from 'components/layouts/Main';
 
-class Index extends React.Component {
+class Index extends Component {
   render() {
     const appState = appStoreModule.getState();
 
